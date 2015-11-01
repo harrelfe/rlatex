@@ -1,0 +1,505 @@
+% Hints for those not versed in LaTeX are at
+% http://biostat.mc.vanderbilt.edu/LaTeXCollab
+
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\usepackage{Sweavel}
+
+
+\usepackage[bibloc=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage{knitrl}
+\usepackage{filecontents}   % used if deferring supplemental analyses to
+                            % the end of the manuscript or to another document
+
+% Define particular comment commands for each author so as to automatically
+% include name/initials
+\newcommand{\comfh}[1]{\com{FH}{#1}}
+\newcommand{\comfp}[1]{\com{FP}{#1}}
+% To cause all comments and marginal notes to be suppressed, 
+% uncomment the following line
+%\ignorecom
+
+\renewcommand{\cite}[1]{\supercite{#1}}   % make citations use superscripts
+
+\title{Example Report}
+\author{Frank Harrell\thanks{Department of Biostatistics,
+    Vanderbilt University School of Medicine,
+    \texttt{f.harrell@vanderbilt.edu}}
+  \and
+  Fictitious Person\thanks{Department of Irreproducible Research,
+    Slapout College, 
+    \texttt{fp@sloppy.com}}}
+\date{\today}
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+
+\section{Descriptive Statistics}
+\begin{Sinput}
+getHdata(FEV)
+latex(describe(FEV), file='')
+\end{Sinput}
+\begin{spacing}{0.7}
+\begin{center}\textbf{ FEV \\ 6 Variables~~~~~ 654 ~Observations}\end{center}
+\smallskip\hrule\smallskip{\small
+\vbox{\noindent\textbf{id}\setlength{\unitlength}{0.001in}\hfill\begin{picture}(1.5,.1)(1500,0)\linethickness{0.6pt}
+\put(0,0){\line(0,1){82}}
+\put(15,0){\line(0,1){41}}
+\put(30,0){\line(0,1){59}}
+\put(45,0){\line(0,1){35}}
+\put(60,0){\line(0,1){47}}
+\put(75,0){\line(0,1){59}}
+\put(90,0){\line(0,1){88}}
+\put(105,0){\line(0,1){53}}
+\put(120,0){\line(0,1){6}}
+\put(135,0){\line(0,1){65}}
+\put(150,0){\line(0,1){59}}
+\put(165,0){\line(0,1){71}}
+\put(180,0){\line(0,1){53}}
+\put(195,0){\line(0,1){41}}
+\put(210,0){\line(0,1){12}}
+\put(225,0){\line(0,1){71}}
+\put(240,0){\line(0,1){88}}
+\put(255,0){\line(0,1){76}}
+\put(270,0){\line(0,1){47}}
+\put(285,0){\line(0,1){29}}
+\put(300,0){\line(0,1){53}}
+\put(315,0){\line(0,1){18}}
+\put(330,0){\line(0,1){29}}
+\put(345,0){\line(0,1){35}}
+\put(360,0){\line(0,1){24}}
+\put(375,0){\line(0,1){35}}
+\put(390,0){\line(0,1){82}}
+\put(405,0){\line(0,1){100}}
+\put(420,0){\line(0,1){24}}
+\put(435,0){\line(0,1){6}}
+\put(450,0){\line(0,1){41}}
+\put(465,0){\line(0,1){29}}
+\put(480,0){\line(0,1){47}}
+\put(495,0){\line(0,1){76}}
+\put(510,0){\line(0,1){41}}
+\put(525,0){\line(0,1){12}}
+\put(540,0){\line(0,1){59}}
+\put(555,0){\line(0,1){76}}
+\put(570,0){\line(0,1){24}}
+\put(585,0){\line(0,1){35}}
+\put(615,0){\line(0,1){71}}
+\put(630,0){\line(0,1){47}}
+\put(645,0){\line(0,1){71}}
+\put(660,0){\line(0,1){65}}
+\put(690,0){\line(0,1){35}}
+\put(705,0){\line(0,1){71}}
+\put(720,0){\line(0,1){35}}
+\put(735,0){\line(0,1){71}}
+\put(750,0){\line(0,1){59}}
+\put(765,0){\line(0,1){47}}
+\put(780,0){\line(0,1){65}}
+\put(795,0){\line(0,1){65}}
+\put(810,0){\line(0,1){71}}
+\put(825,0){\line(0,1){24}}
+\put(840,0){\line(0,1){71}}
+\put(855,0){\line(0,1){35}}
+\put(870,0){\line(0,1){41}}
+\put(885,0){\line(0,1){18}}
+\put(900,0){\line(0,1){47}}
+\put(915,0){\line(0,1){18}}
+\put(930,0){\line(0,1){29}}
+\put(945,0){\line(0,1){41}}
+\put(960,0){\line(0,1){18}}
+\put(975,0){\line(0,1){18}}
+\put(990,0){\line(0,1){41}}
+\put(1005,0){\line(0,1){18}}
+\put(1020,0){\line(0,1){41}}
+\put(1035,0){\line(0,1){47}}
+\put(1050,0){\line(0,1){41}}
+\put(1065,0){\line(0,1){29}}
+\put(1155,0){\line(0,1){24}}
+\put(1170,0){\line(0,1){35}}
+\put(1185,0){\line(0,1){53}}
+\put(1200,0){\line(0,1){29}}
+\put(1215,0){\line(0,1){59}}
+\put(1230,0){\line(0,1){53}}
+\put(1245,0){\line(0,1){24}}
+\put(1260,0){\line(0,1){41}}
+\put(1275,0){\line(0,1){47}}
+\put(1290,0){\line(0,1){24}}
+\put(1305,0){\line(0,1){6}}
+\put(1320,0){\line(0,1){12}}
+\put(1335,0){\line(0,1){47}}
+\put(1350,0){\line(0,1){65}}
+\put(1365,0){\line(0,1){18}}
+\put(1395,0){\line(0,1){29}}
+\put(1485,0){\line(0,1){6}}
+\end{picture}
+
+{\smaller
+\begin{tabular}{ rrrrrrrrrrrr }
+n&missing&unique&Info&Mean&.05&.10&.25&.50&.75&.90&.95 \\
+654&0&654&1&37170& 3142& 6162&15811&36071&53638&73342&77706 \end{tabular}
+\begin{verbatim}
+lowest :   201   202   301   341   351
+highest: 83841 83901 83951 83952 90001 
+\end{verbatim}
+}
+\smallskip\hrule\smallskip
+}
+\vbox{\noindent\textbf{age}{\smaller[1] [years]}
+
+{\smaller
+\begin{tabular}{ rrrrrrrrrrrr }
+n&missing&unique&Info&Mean&.05&.10&.25&.50&.75&.90&.95 \\
+654&0&17&0.99&9.931& 5& 6& 8&10&12&14&15 \end{tabular}
+
+\begin{verbatim}
+          3 4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+Frequency 2 9 28 37 54 85 94 81 90 57 43 25 19 13  8  6  3
+%         0 1  4  6  8 13 14 12 14  9  7  4  3  2  1  1  0
+\end{verbatim}
+}
+\smallskip\hrule\smallskip
+}
+\vbox{\noindent\textbf{fev}{\smaller[1] [liters]}\setlength{\unitlength}{0.001in}\hfill\begin{picture}(1.5,.1)(1500,0)\linethickness{0.6pt}
+\put(0,0){\line(0,1){14}}
+\put(60,0){\line(0,1){5}}
+\put(75,0){\line(0,1){5}}
+\put(90,0){\line(0,1){9}}
+\put(105,0){\line(0,1){9}}
+\put(120,0){\line(0,1){5}}
+\put(135,0){\line(0,1){14}}
+\put(150,0){\line(0,1){18}}
+\put(165,0){\line(0,1){32}}
+\put(180,0){\line(0,1){41}}
+\put(195,0){\line(0,1){27}}
+\put(210,0){\line(0,1){45}}
+\put(225,0){\line(0,1){50}}
+\put(240,0){\line(0,1){59}}
+\put(255,0){\line(0,1){50}}
+\put(270,0){\line(0,1){91}}
+\put(285,0){\line(0,1){68}}
+\put(300,0){\line(0,1){50}}
+\put(315,0){\line(0,1){50}}
+\put(330,0){\line(0,1){68}}
+\put(345,0){\line(0,1){45}}
+\put(360,0){\line(0,1){36}}
+\put(375,0){\line(0,1){73}}
+\put(390,0){\line(0,1){95}}
+\put(405,0){\line(0,1){50}}
+\put(420,0){\line(0,1){64}}
+\put(435,0){\line(0,1){55}}
+\put(450,0){\line(0,1){77}}
+\put(465,0){\line(0,1){100}}
+\put(480,0){\line(0,1){36}}
+\put(495,0){\line(0,1){77}}
+\put(510,0){\line(0,1){59}}
+\put(525,0){\line(0,1){86}}
+\put(540,0){\line(0,1){68}}
+\put(555,0){\line(0,1){77}}
+\put(570,0){\line(0,1){45}}
+\put(585,0){\line(0,1){41}}
+\put(600,0){\line(0,1){59}}
+\put(615,0){\line(0,1){73}}
+\put(630,0){\line(0,1){50}}
+\put(645,0){\line(0,1){55}}
+\put(660,0){\line(0,1){68}}
+\put(675,0){\line(0,1){95}}
+\put(690,0){\line(0,1){59}}
+\put(705,0){\line(0,1){36}}
+\put(720,0){\line(0,1){59}}
+\put(735,0){\line(0,1){32}}
+\put(750,0){\line(0,1){41}}
+\put(765,0){\line(0,1){32}}
+\put(780,0){\line(0,1){36}}
+\put(795,0){\line(0,1){18}}
+\put(810,0){\line(0,1){41}}
+\put(825,0){\line(0,1){27}}
+\put(840,0){\line(0,1){5}}
+\put(855,0){\line(0,1){36}}
+\put(870,0){\line(0,1){14}}
+\put(885,0){\line(0,1){27}}
+\put(900,0){\line(0,1){27}}
+\put(915,0){\line(0,1){14}}
+\put(930,0){\line(0,1){9}}
+\put(945,0){\line(0,1){23}}
+\put(960,0){\line(0,1){9}}
+\put(975,0){\line(0,1){32}}
+\put(990,0){\line(0,1){9}}
+\put(1020,0){\line(0,1){18}}
+\put(1035,0){\line(0,1){23}}
+\put(1050,0){\line(0,1){23}}
+\put(1080,0){\line(0,1){18}}
+\put(1095,0){\line(0,1){5}}
+\put(1110,0){\line(0,1){14}}
+\put(1125,0){\line(0,1){9}}
+\put(1140,0){\line(0,1){9}}
+\put(1155,0){\line(0,1){5}}
+\put(1170,0){\line(0,1){9}}
+\put(1185,0){\line(0,1){14}}
+\put(1200,0){\line(0,1){9}}
+\put(1215,0){\line(0,1){9}}
+\put(1275,0){\line(0,1){5}}
+\put(1290,0){\line(0,1){5}}
+\put(1320,0){\line(0,1){5}}
+\put(1440,0){\line(0,1){9}}
+\put(1485,0){\line(0,1){5}}
+\end{picture}
+
+{\smaller
+\begin{tabular}{ rrrrrrrrrrrr }
+n&missing&unique&Info&Mean&.05&.10&.25&.50&.75&.90&.95 \\
+654&0&575&1&2.637&1.445&1.612&1.981&2.547&3.119&3.813&4.289 \end{tabular}
+\begin{verbatim}
+lowest : 0.791 0.796 0.839 1.004 1.072
+highest: 5.102 5.224 5.633 5.638 5.793 
+\end{verbatim}
+}
+\smallskip\hrule\smallskip
+}
+\vbox{\noindent\textbf{height}{\smaller[1] [inches]}\setlength{\unitlength}{0.001in}\hfill\begin{picture}(1.5,.1)(1500,0)\linethickness{0.6pt}
+\put(0,0){\line(0,1){3}}
+\put(15,0){\line(0,1){3}}
+\put(45,0){\line(0,1){6}}
+\put(105,0){\line(0,1){15}}
+\put(150,0){\line(0,1){12}}
+\put(180,0){\line(0,1){6}}
+\put(210,0){\line(0,1){21}}
+\put(240,0){\line(0,1){6}}
+\put(255,0){\line(0,1){30}}
+\put(285,0){\line(0,1){12}}
+\put(315,0){\line(0,1){36}}
+\put(345,0){\line(0,1){30}}
+\put(375,0){\line(0,1){55}}
+\put(390,0){\line(0,1){9}}
+\put(420,0){\line(0,1){36}}
+\put(450,0){\line(0,1){18}}
+\put(480,0){\line(0,1){45}}
+\put(495,0){\line(0,1){21}}
+\put(525,0){\line(0,1){27}}
+\put(555,0){\line(0,1){27}}
+\put(585,0){\line(0,1){79}}
+\put(615,0){\line(0,1){33}}
+\put(630,0){\line(0,1){67}}
+\put(660,0){\line(0,1){36}}
+\put(690,0){\line(0,1){64}}
+\put(720,0){\line(0,1){42}}
+\put(750,0){\line(0,1){91}}
+\put(765,0){\line(0,1){55}}
+\put(795,0){\line(0,1){73}}
+\put(825,0){\line(0,1){67}}
+\put(855,0){\line(0,1){91}}
+\put(870,0){\line(0,1){36}}
+\put(900,0){\line(0,1){100}}
+\put(930,0){\line(0,1){39}}
+\put(960,0){\line(0,1){70}}
+\put(990,0){\line(0,1){58}}
+\put(1005,0){\line(0,1){58}}
+\put(1035,0){\line(0,1){55}}
+\put(1065,0){\line(0,1){67}}
+\put(1095,0){\line(0,1){27}}
+\put(1125,0){\line(0,1){61}}
+\put(1140,0){\line(0,1){36}}
+\put(1170,0){\line(0,1){52}}
+\put(1200,0){\line(0,1){33}}
+\put(1230,0){\line(0,1){33}}
+\put(1245,0){\line(0,1){12}}
+\put(1275,0){\line(0,1){33}}
+\put(1305,0){\line(0,1){21}}
+\put(1335,0){\line(0,1){24}}
+\put(1365,0){\line(0,1){3}}
+\put(1380,0){\line(0,1){24}}
+\put(1410,0){\line(0,1){6}}
+\put(1440,0){\line(0,1){6}}
+\put(1470,0){\line(0,1){3}}
+\put(1485,0){\line(0,1){6}}
+\end{picture}
+
+{\smaller
+\begin{tabular}{ rrrrrrrrrrrr }
+n&missing&unique&Info&Mean&.05&.10&.25&.50&.75&.90&.95 \\
+654&0&56&1&61.14&51.0&53.0&57.0&61.5&65.5&68.5&70.0 \end{tabular}
+\begin{verbatim}
+lowest : 46.0 46.5 47.0 48.0 49.0, highest: 72.0 72.5 73.0 73.5 74.0 
+\end{verbatim}
+}
+\smallskip\hrule\smallskip
+}
+\vbox{\noindent\textbf{sex}
+
+{\smaller
+\begin{tabular}{ rrr }
+n&missing&unique \\
+654&0&2 \end{tabular}
+\begin{verbatim}
+
+female (318, 49%), male (336, 51%) 
+\end{verbatim}
+}
+\smallskip\hrule\smallskip
+}
+\vbox{\noindent\textbf{smoke}
+
+{\smaller
+\begin{tabular}{ rrr }
+n&missing&unique \\
+654&0&2 \end{tabular}
+\begin{verbatim}
+
+non-current smoker (589, 90%), current smoker (65, 10%) 
+\end{verbatim}
+}
+\smallskip\hrule\smallskip
+}
+}\end{spacing}
+
+\comfh{I have a question about the data.  Do all the values make sense?
+  Are these data applicable to our research question?  Did we really
+  land a man on the moon?}
+\comfp{No, I don't think we landed a man on the moon, but I do think
+  that hundreds of aliens from an advanced civilization visited us in
+  the 1950s and forgot to say hello.}
+\comfh{I'm convinced}
+
+This section is for the Supplemental Material  section.  Code that
+goes below is executed in the original order of appearance, not at the
+end.  But the code and its output appear only at the end.
+
+\begin{filecontents}{\jobname.sup}    % Here jobname=spaper
+\begin{Schunk}
+\begin{Sinput}
+datadensity(FEV)
+\end{Sinput}
+
+
+\centerline{\includegraphics{datadens-1} }
+
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Sinput}
+plot(runif(10))
+\end{Sinput}
+
+
+\centerline{\includegraphics{miscplot-1} }
+
+\end{Schunk}
+\end{filecontents}
+
+\begin{filecontents}{\jobname2.sup}   % Creates spaper2.sup
+If you need to run \R\ code in disconnected portions of the document,
+create new output file names as done here.
+\begin{Schunk}
+\begin{Sinput}
+plot(runif(10), col='red')
+2+pi
+\end{Sinput}
+\begin{Soutput}
+[1] 5.141593
+\end{Soutput}
+
+
+\centerline{\includegraphics{miscplot2-1} }
+
+\end{Schunk}
+\end{filecontents}
+
+\section{FEV vs.\ Age}
+Figure~\ref{fig:plot} shows the raw data for some of the key variables.
+\begin{Schunk}
+\begin{Sinput}
+ggplot(FEV, aes(x=age, y=fev, color=sex)) + geom_point()
+\end{Sinput}
+\begin{figure}[htbp]
+
+\centerline{\includegraphics{plot-1} }
+
+\caption[Scatterplot of age vs]{Scatterplot of age vs. FEV stratified by sex}\label{fig:plot}
+\end{figure}
+\end{Schunk}
+\comfh{\textbf{TO DO}:
+  \begin{enumerate}
+    \item See if other variables need to be accounted for
+    \item See if age and sex interact
+  \end{enumerate}}
+
+\printbibliography[title={Bibliography}]
+
+\section{Supplemental Material}
+
+\subsection{Computing Environment}
+These analyses were done using the following versions of R\cite{Rsystem}, the
+\snote{CHECK}
+operating system, and add-on packages \code{Hmisc}\cite{Hmisc},
+\code{rms}\cite{rrms}, and others:
+\begin{itemize}\raggedright
+  \item R version 3.2.2 (2015-08-14), \verb|x86_64-pc-linux-gnu|
+  \item Base packages: base, datasets, graphics, grDevices, grid,
+    methods, stats, utils
+  \item Other packages: Formula~1.2-1, ggplot2~1.0.1,
+    Hmisc~3.17-0, knitr~1.11, lattice~0.20-33, rms~4.4-1,
+    SparseM~1.7, survival~2.38-3
+  \item Loaded via a namespace (and not attached):
+    acepack~1.3-3.3, cluster~2.0.3, codetools~0.2-14,
+    colorspace~1.2-6, digest~0.6.8, evaluate~0.8, foreign~0.8-66,
+    formatR~1.2.1, gridExtra~2.0.0, gtable~0.1.2, labeling~0.3,
+    latticeExtra~0.6-26, magrittr~1.5, MASS~7.3-44, Matrix~1.2-2,
+    MatrixModels~0.4-1, multcomp~1.4-1, munsell~0.4.2,
+    mvtnorm~1.0-3, nlme~3.1-122, nnet~7.3-11, plyr~1.8.3,
+    polspline~1.1.12, proto~0.3-10, quantreg~5.19,
+    RColorBrewer~1.1-2, Rcpp~0.12.1, reshape2~1.4.1, rpart~4.1-10,
+    sandwich~2.3-4, scales~0.3.0, splines~3.2.2, stringi~0.5-5,
+    stringr~1.0.0, TH.data~1.0-6, tools~3.2.2, zoo~1.7-12
+\end{itemize}
+
+The reproducible research framework \code{knitr}~\cite{knitr} was used.
+
+% To print all code in an appendix if you used knitrSet(echo=FALSE),
+% use the following
+
+\subsection{All \R\ Code}
+\begin{Schunk}
+\begin{Sinput}
+require(rms)
+knitrSet(echo=TRUE)   # set echo=FALSE to not print code
+lan <- function(a, ...) latex(a, file='', table.env=FALSE, ...)
+getHdata(FEV)
+latex(describe(FEV), file='')
+datadensity(FEV)
+plot(runif(10))
+plot(runif(10), col='red')
+2+pi
+ggplot(FEV, aes(x=age, y=fev, color=sex)) + geom_point()
+toLatex(sessionInfo(), locale=FALSE)
+\end{Sinput}
+\end{Schunk}
+
+\subsection{Supplemental Analyses}
+% Include thist subsection if you used \filecontents above
+\input{\jobname.sup}
+\input{\jobname2.sup}
+
+% You can also have LaTeX made a separate pdf file for the
+% supplemental analyses - see spapersub.tex
+% Omit the two \input{} above if doing this
+% To produce the final pdf supplemental report you run pdflatex spapersub
+% and do not run R or knitr as this was already done when you run spaper.Rnw
+
+\end{document}
+
+
+To update wiki:
+cp -p spaper.* /tmp
+browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.pdf;revInfo=1
+browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.Rnw;revInfo=1

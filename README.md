@@ -13,7 +13,7 @@ The `bin` directory contains `Linux/Unix` shell command helper scripts, e.g., `i
 --------|--------
 | `hslide.sty` | Documents that double as handouts and slides, using `knitr` |
 | `knitrl.sty` | For use with `knitr` allowing pretty-printing and minimal but effective framing of `R` code and output, replacing `Sweavel.sty` |
-| `spaper.sty` | Manuscript composition handling author comments/todo lists |
+| `spaper.sty` | Statistical reports + manuscript composition handling author comments/todo lists |
 
 See also [greort.sty](https://github.com/harrelfe/greport/blob/master/inst/greport.sty).
 

@@ -1,7 +1,8 @@
 #!/bin/bash
-cd ~/doc/latex/texinput
-sudo cp hslide.sty /usr/share/texmf/tex/latex/.
-sudo cp knitrl.sty /usr/share/texmf/tex/latex/.
-sudo cp spaper.sty /usr/share/texmf/tex/latex/.
-sudo cp greport.sty /usr/share/texmf/tex/latex/.
+cd /tmp
+rm -f *.sty
+wget https://raw.githubusercontent.com/harrelfe/rlatex/master/packages/knitrl.sty
+wget https://raw.githubusercontent.com/harrelfe/rlatex/master/packages/hslide.sty
+wget https://raw.githubusercontent.com/harrelfe/rlatex/master/packages/spaper.sty
+sudo cp *.sty /usr/share/texmf/tex/latex/
 sudo mktexlsr

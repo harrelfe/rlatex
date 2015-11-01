@@ -1,0 +1,124 @@
+% Hints for those not versed in LaTeX are at
+% http://biostat.mc.vanderbilt.edu/LaTeXCollab
+
+\documentclass{article}
+\usepackage[bibloc=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage{knitrl}
+\usepackage{filecontents}   % used if deferring supplemental analyses to
+                            % the end of the manuscript or to another document
+
+% Define particular comment commands for each author so as to automatically
+% include name/initials
+\newcommand{\comfh}[1]{\com{FH}{#1}}
+\newcommand{\comfp}[1]{\com{FP}{#1}}
+% To cause all comments and marginal notes to be suppressed, 
+% uncomment the following line
+%\ignorecom
+
+\renewcommand{\cite}[1]{\supercite{#1}}   % make citations use superscripts
+
+\title{Example Report}
+\author{Frank Harrell\thanks{Department of Biostatistics,
+    Vanderbilt University School of Medicine,
+    \texttt{f.harrell@vanderbilt.edu}}
+  \and
+  Fictitious Person\thanks{Department of Irreproducible Research,
+    Slapout College, 
+    \texttt{fp@sloppy.com}}}
+\date{\today}
+\begin{document}
+\maketitle
+\tableofcontents
+
+<<echo=FALSE>>=
+require(rms)
+knitrSet(echo=TRUE)   # set echo=FALSE to not print code
+lan <- function(a, ...) latex(a, file='', table.env=FALSE, ...)
+@
+
+\section{Descriptive Statistics}
+<<desc,results='asis'>>=
+getHdata(FEV)
+latex(describe(FEV), file='')
+@ 
+\comfh{I have a question about the data.  Do all the values make sense?
+  Are these data applicable to our research question?  Did we really
+  land a man on the moon?}
+\comfp{No, I don't think we landed a man on the moon, but I do think
+  that hundreds of aliens from an advanced civilization visited us in
+  the 1950s and forgot to say hello.}
+\comfh{I'm convinced}
+
+This section is for the Supplemental Material  section.  Code that
+goes below is executed in the original order of appearance, not at the
+end.  But the code and its output appear only at the end.
+
+\begin{filecontents}{\jobname.sup}    % Here jobname=spaper
+<<datadens,h=3,w=4>>=
+datadensity(FEV)
+@ 
+
+<<miscplot>>=
+plot(runif(10))
+@ 
+\end{filecontents}
+
+\begin{filecontents}{\jobname2.sup}   % Creates spaper2.sup
+If you need to run \R\ code in disconnected portions of the document,
+create new output file names as done here.
+<<miscplot2>>=
+plot(runif(10), col='red')
+2+pi
+@ 
+\end{filecontents}
+
+\section{FEV vs.\ Age}
+Figure~\ref{fig:plot} shows the raw data for some of the key variables.
+<<plot,w=5.5,h=3.75,cap='Scatterplot of age vs.\ FEV stratified by sex'>>=
+ggplot(FEV, aes(x=age, y=fev, color=sex)) + geom_point()
+@ 
+\comfh{\textbf{TO DO}:
+  \begin{enumerate}
+    \item See if other variables need to be accounted for
+    \item See if age and sex interact
+  \end{enumerate}}
+
+\printbibliography[title={Bibliography}]
+
+\section{Supplemental Material}
+
+\subsection{Computing Environment}
+These analyses were done using the following versions of R\cite{Rsystem}, the
+\snote{CHECK}
+operating system, and add-on packages \code{Hmisc}\cite{Hmisc},
+\code{rms}\cite{rrms}, and others:
+<<sinfo,echo=FALSE,results='asis'>>=
+toLatex(sessionInfo(), locale=FALSE)
+@
+The reproducible research framework \code{knitr}~\cite{knitr} was used.
+
+% To print all code in an appendix if you used knitrSet(echo=FALSE),
+% use the following
+
+\subsection{All \R\ Code}
+<<all-code, ref.label=all_labels(), echo=TRUE, eval=FALSE>>=
+@ 
+
+\subsection{Supplemental Analyses}
+% Include thist subsection if you used \filecontents above
+\input{\jobname.sup}
+\input{\jobname2.sup}
+
+% You can also have LaTeX made a separate pdf file for the
+% supplemental analyses - see spapersub.tex
+% Omit the two \input{} above if doing this
+% To produce the final pdf supplemental report you run pdflatex spapersub
+% and do not run R or knitr as this was already done when you run spaper.Rnw
+
+\end{document}
+
+
+To update wiki:
+cp -p spaper.* /tmp
+browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.pdf;revInfo=1
+browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.Rnw;revInfo=1
