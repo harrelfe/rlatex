@@ -1,0 +1,125 @@
+% Usage: \usepackage[options]{knitrl}
+%
+% Option         Default     Meaning
+% ------         -------     -------
+% Rsize          normalsize  Font size for R code listing
+% Routsize       normalsize  Font size for R output
+% Rcolor         black       Color for R code
+% Routcolor      black       Color for R output
+% Rcommentcolor  black       Color for R code comments
+% Rbackground    white       Color for R code background
+% Routbackground white       Color for R output background
+%
+% Here is how to make changes for specific code chunks:
+% To change size of R code, use e.g.: \def\Rsize{\normalsize}
+% To change just the size of output, use e.g.: \def\Routsize{\smaller[2]}
+% To change colors of R code, output, and commands, use e.g.:
+% \def\Rcolor{\color{black}}
+% \def\Routcolor{\color{green}}
+% \def\Rcommentcolor{\color{red}}
+% To change background color or R code and/or output, use e.g.:
+% \def\Rbackground{\color{white}}
+% \def\Routbackground{\color{white}}
+% To use rgb specifications use \color[rgb]{ , , }
+% To use gray scale use e.g. \color[gray]{0.5}
+% If you change any of these after the first chunk is produced, the
+% changes will have effect only for the next chunk.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{knitrl}[2015/10/29 Substitute for Sweave.sty using listings package with relsize]
+
+\RequirePackage{xkeyval,listings,fancyvrb,color,relsize,ae,needspace,longtable,epic,setspace}
+% needspace longtable epic needed by print(fit, latex=TRUE)
+\RequirePackage[T1]{fontenc}
+%\IfFileExists{upquote.sty}{\RequirePackage{upquote}}{}
+
+% {\csname ... endcsname} puts \ in front of definition of command
+\DeclareOptionX{Rsize}{\def\Rsize{\csname#1\endcsname}}
+\DeclareOptionX{Routsize}{\def\Routsize{\csname#1\endcsname}}
+\DeclareOptionX{Rcolor}{\def\Rcolor{#1}}
+\DeclareOptionX{Routcolor}{\def\Routcolor{#1}}
+\DeclareOptionX{Rcommentcolor}{\def\Rcommentcolor{#1}}
+\DeclareOptionX{Rbackground}{\def\Rbackground{#1}}
+\DeclareOptionX{Routbackground}{\def\Routbackground{#1}}
+
+\ExecuteOptionsX{Rsize=normalsize,Routsize=normalsize,Rcolor=black,Routcolor=black,Rcommentcolor=black,Rbackground=white,Routbackground=white}
+\ProcessOptionsX\relax
+
+% Cut out extra vertical space around verbatim and tabular created by latex.describe
+\RequirePackage{etoolbox}
+\makeatletter
+\preto{\@verbatim}{\topsep=-1.4pt \partopsep=0pt} % was topsep -1.5pt -1pt
+\preto{\@tabular}{\parskip=2pt \parsep=0pt}
+\makeatother
+% Also try:  (see http://tex.stackexchange.com/questions/47910/reduce-space-before-and-after-tabular-environment/49709#49709)
+% \setlength{\textfloatsep}{0.1cm}
+% \addtolength{\parskip}{-0.5mm}
+
+\def\R{{\normalfont\textsf{R}}{}}
+
+\lstdefinestyle{Rstyle}{fancyvrb=false,escapechar=`,language=R,%
+                        basicstyle={\color{\Rcolor}\Rsize\ttfamily},
+                        backgroundcolor=\color{\Rbackground},%
+                        showstringspaces=false,%
+                        keywordstyle=\color{\Rcolor},%
+                        commentstyle={\color{\Rcommentcolor}\smaller\itshape},
+                        literate={<-}{{$\leftarrow$}}2{<<-}{{$\twoheadleftarrow$}}2{~}{{$\sim$}}1{<=}{{$\leq$}}2{>=}{{$\geq$}}2{^}{{$^{\scriptstyle\wedge}$}}1,%
+                        alsoother={$},%
+                        frame=shadowbox,framerule=0.9pt,framesep=0.8pt,%
+                        rulecolor=\color[gray]{0.7},rulesepcolor=\color[gray]{0.7},
+                        alsoletter={.<-},%
+                        otherkeywords={!,!=,~,$,*,\&,\%/\%,\%*\%,\%\%,<-,<<-,/},%
+                        escapeinside={(*}{*)}}%
+% Other options of interest:
+% frame=single,framerule=0.1pt,framesep=1pt,rulecolor=\color{blue},
+% numbers=left,numberstyle=\tiny,stepnumber=1,numbersep=7pt,
+% keywordstyle={\bf\Rcolor}
+% Another good choice for rulesepcolor (for the shadowbox) is light
+% blue: \color[rgb]{0.8,0.85,1}
+
+\lstdefinestyle{Routstyle}{fancyvrb=false,literate={~}{{$\sim$}}1{R^2}{{$R^{2}$}}2{^}{{$^{\scriptstyle\wedge}$}}1{R-squared}{{$R^{2}$}}2,%
+ frame=ltb,framerule=0.2pt,framesep=1pt,rulesep=0.5pt,rulecolor=\color[gray]{0.7},basicstyle=\color{\Routcolor}\Routsize\ttfamily,%
+ backgroundcolor=\color{\Routbackground}}
+
+% The following handles the case where knitr already included
+% \usepackage{Sweavel}
+% http://latex-community.org/forum/viewtopic.php?f=4&t=19756
+\csundef{Schunk}     % provided by etoolbox package
+\csundef{endSchunk}
+\csundef{Sinput@}
+\csundef{endSinput@}
+\csundef{Sinput}
+\csundef{endSinput}
+\csundef{Scode}
+\csundef{endScode}
+\csundef{Scode@}
+\csundef{endScode@}
+\csundef{Soutput}
+\csundef{endSoutput}
+\csundef{Soutput@}
+\csundef{endSoutput@}
+\csundef{Sinputsmall}
+\csundef{endSinputsmall}
+\csundef{Sinputsmall@}
+\csundef{endSinputsmall@}
+\csundef{Sinputsmaller}
+\csundef{endSinputsmaller}
+\csundef{Sinputsmaller@}
+\csundef{endSinputsmaller@}
+
+\newenvironment{Schunk}{}{}
+\lstnewenvironment{Sinput}{\lstset{style=Rstyle}}{}
+\lstnewenvironment{Scode}{\lstset{style=Rstyle}}{}
+\lstnewenvironment{Soutput}{\lstset{style=Routstyle}}{}
+\lstnewenvironment{Sinputsmall}{%
+ \lstset{style=Rstyle,basicstyle={\small}}}{}
+\lstnewenvironment{Sinputsmaller}{%
+ \lstset{style=Rstyle,basicstyle={\smaller}}}{}
+
+\endinput
+
+sudo cp ~/doc/latex/texinput/knitrl.sty /usr/share/texmf/tex/latex/. && sudo mktexlsr
+
+To update on wiki:
+cp -p knitrl.sty /tmp
+browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/SweaveTemplate?filename=knitrl.sty;revInfo=1

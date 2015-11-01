@@ -1,0 +1,108 @@
+% Usage:
+% \usepackage[options]{hslide}
+% \begin{document}
+% \Huge
+% \pagenumbering{bychapter}
+% ...
+% \dobib
+% \end{document}
+%
+% Option     Default      Meaning
+% citesize   \smaller[3]  Font size for citations [n]
+% margin     0.75in       Margins with geometry package, all sides
+% nochappg                Do not use chapter-page page numbers with chappg pkg
+% bibloc     (none)       Full path and name of BiBTeX .bib file
+% 
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hslide}[2015/10/28 Handouts/Slides Compromise Style]
+\RequirePackage{xkeyval}
+
+\RequirePackage[backref=true]{biblatex}
+\newif\ifnochappg
+% {\csname ... endcsname} puts \ in front of definition of command
+\DeclareOptionX{citesize}{\def\citesize{\csname#1\endcsname}}
+\DeclareOptionX{margin}{\def\margin{#1}}
+\DeclareOptionX{nochappg}{\nochappgtrue}
+\DeclareOptionX{bibloc}{\addbibresource{#1}}
+
+\ExecuteOptionsX{citesize=smaller[3],margin=0.75in}
+\ProcessOptionsX\relax
+
+\RequirePackage{helvet}
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\RequirePackage[font={small,singlespacing}]{caption}
+\RequirePackage{relsize}     % For \smaller etc.
+\RequirePackage{needspace}   % needed by print(fit, latex=TRUE)
+\def\need#1 {\vskip 0pt plus #1 \penalty -200 \vskip 0pt plus -#1}
+
+
+% Citations in [] and smaller than usual
+\renewcommand*{\citesetup}{%
+  \citesize
+  \biburlsetup
+  \frenchspacing}
+
+% Adds annote fields to bibliography:
+\renewbibmacro{finentry}{\finentry%
+   \iffieldundef{annotation}
+      {}
+      {\par\medskip{\smaller\begin{spacing}{0.7}\printfield{annotation}\end{spacing}}\finentry}}
+% See http://tex.stackexchange.com/questions/146766/biblatex-referencing-using-ieee-style-with-annotations
+
+\def\dobib{\clearpage%
+\stepcounter{chapter}
+\addcontentsline{toc}{chapter}{Bibliography}
+{\normalsize
+\printbibliography[title={Annotated Bibliography}]}
+}
+
+\ifnochappg
+\else
+\RequirePackage[auto]{chappg}   % page numbers are per-chapter
+\fi
+
+\RequirePackage[margin=\margin]{geometry}
+\parskip 14pt
+\parindent 0ex
+
+\DeclareGraphicsExtensions{.pdf, .jpg, .png}
+
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\beq}{\[}
+\newcommand{\eeq}{\]}
+\newcommand{\beqa}{\begin{eqnarray*}}
+\newcommand{\eeqa}{\end{eqnarray*}}
+
+\newcommand{\ra}{$\rightarrow \ $}
+\newcommand{\R}{{\normalfont\textsf{R}}{}}
+\newcommand{\logit}{\mathop{\rm logit}\nolimits}
+\newcommand{\Prob}{\mathop{\rm Prob}\nolimits}
+\newcommand{\etal}{{\em et al.}}
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+
+\setstretch{1}  % so that doublespace.sty will only apply when
+                % \begin{spacing} in effect
+
+%Optimize for note-taking
+\newenvironment{itmz}{
+ \renewcommand{\labelitemi}{\Huge$\cdot$}
+ \begin{itemize} \setlength{\itemsep}{3ex}}
+ {\end{itemize}}
+
+\pagestyle{headings}
+
+%\RequirePackage[hyphens]{url}
+\RequirePackage[bookmarks,hyperfootnotes=false,
+ colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\RequirePackage{breakurl}
+
+\endinput
+
+sudo cp ~/doc/latex/texinput/hslide.sty /usr/share/texmf/tex/latex/.
+sudo mktexlsr
