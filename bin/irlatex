@@ -1,0 +1,7 @@
+#!/bin/bash
+cd ~/doc/latex/texinput
+sudo cp hslide.sty /usr/share/texmf/tex/latex/.
+sudo cp knitrl.sty /usr/share/texmf/tex/latex/.
+sudo cp spaper.sty /usr/share/texmf/tex/latex/.
+sudo cp greport.sty /usr/share/texmf/tex/latex/.
+sudo mktexlsr

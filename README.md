@@ -7,6 +7,8 @@ The `examples` directory contains `knitr` documents (`.Rnw`) that show how to us
 
 The `packages` directory contains the `LaTeX` package source files.  The following describes the purpose of each package there.
 
+The `bin` directory contains `Linux/Unix` shell command helper scripts, e.g., `irlatex` for downloading from this site the latest versions of the packages and installing them in the central location for `LaTeX` add-on packages.
+
 |*Package*|*Purpose*|
 --------|--------
 | `hslide.sty` | Documents that double as handouts and slides, using `knitr` |
@@ -15,6 +17,9 @@ The `packages` directory contains the `LaTeX` package source files.  The followi
 
 See also [greort.sty](https://github.com/harrelfe/greport/blob/master/inst/greport.sty).
 
+
+#### Installation of `LaTeX` Packages
+At least on `Linux` systems, 
 
 
 
