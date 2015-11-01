@@ -19,7 +19,15 @@ See also [greort.sty](https://github.com/harrelfe/greport/blob/master/inst/grepo
 
 
 #### Installation of `LaTeX` Packages
-At least on `Linux` systems, 
+On `Linux` systems, run the following `bash` script to install the `irlatex` `bash` script stored here.  Make sure that `~/bin` is in your system path.
+
+```
+cd ~/bin
+wget https://raw.githubusercontent.com/harrelfe/rlatex/master/bin/irlatex
+chmod +x irlatex
+```
+
+Then from any directory run the command `irlatex` which will download and install on your central `LaTeX` system all of the packages stored here.
 
 
 
