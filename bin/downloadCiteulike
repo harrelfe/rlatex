@@ -1,0 +1,112 @@
+rm ~/Downloads/harrelfe.bib
+browser http://www.citeulike.org/bibtex_options/user/harrelfe
+read -p "Press Enter after exporting bib file to ~/Downloads/harrelfe.bib"
+ls -la ~/Downloads/harrelfe.bib
+cat ~/Downloads/harrelfe.bib | \
+sed \
+ -e "s/\\\\\\$/\$/g" \
+ -e "s/\\\\\\\\/\\\\/g" \
+ -e "s/\\$\\\\log\\\\_/\\$\\\\log_/g" \
+ -e "s/<em>/\\\\emph{/g" \
+ -e "s/<\/em>/\}/g" \
+ -e "s/comment =/annote =/g" \
+ -e "s/Psychosomatic Medicine/Psychosom Med/" \
+ -e "s/Journal of Vegetation Science/J Veg Sci/" \
+ -e "s/The Journal of pharmacology and experimental therapeutics/J Pharm Exp Ther/" \
+ -e "s/Statistics in [M,m]edicine/Stat Med/" \
+ -e "s/BMC Health Services Research/BMC Hlth Serv Res/" \
+ -e "s/Journal of Applied Statistics/J Appl Stat/" \
+ -e "s/Journal of Econometrics/J Econometrics/" \
+ -e "s/Canadian Medical Association Journal/Can Med Assoc J/" \
+ -e "s/Academic Emergency Medicine/Acad Emerg Med/" \
+ -e "s/Academic Radiology/Acad Rad/" \
+ -e "s/American Journal of Sports Medicine/Am J Sports Med/" \
+ -e "s/American Journal of Gastroenterology/Am J Gastroent/" \
+ -e "s/American Journal of Human Genetics/Am J Hum Gen/" \
+ -e "s/American Journal of Occupational Therapy/Am J Occ Ther/" \
+ -e "s/American Journal of Respiratory and Critical Care Medicine/Am J Resp Crit Care Med/" \
+ -e "s/American Scientist/Am Scientist/" \
+ -e "s/Annual Review of Psychology/Ann Rev Psychol/" \
+ -e "s/Annual Review of Public Health/Ann Rev Pub Hlth/" \
+ -e "s/Atmospheric Environment/Atmosph Env/" \
+ -e "s/Bone Marrow Transplant/Bone Mar Transpl/" \
+ -e "s/Canadian Journal of Physiology and Pharmacology/Can J Phys Pharm/" \
+ -e "s/Cancer Investigation/Ca Invest/" \
+ -e "s/Cancer Treatment Reports/Ca Trt Rep/" \
+ -e "s/Cardiovascular Drugs and Therapy/Cardiovasc Drugs Ther/" \
+ -e "s/Catheterization and Cardiovascular Diagnosis/Cath Cardiovasc Diag/" \
+ -e "s/Circulation Research/Circ Res/" \
+ -e "s/Clinical and Investigative Medicine/Clin Inv Med/" \
+ -e "s/Computational Methods and Programs in Biomedicine/Comp Meth Prog Biomed/" \
+ -e "s/Computers and Biomedical Research/Comp Biomed Res/" \
+ -e "s/Duquesne Law Journal/Duquesne Law J/" \
+ -e "s/Environmental Health Perspectives/Env Hlth Perspect/" \
+ -e "s/Epidemiology/Epi/" \
+ -e "s/European heart journal/Eur Heart J/" \
+ -e "s/Gastroenterology/Gastroent/" \
+ -e "s/Genetic Epidemiology/Gen Epi/" \
+ -e "s/Health Economics/Hlth Econ/" \
+ -e "s/Health Services Research/Hlth Serv Res/" \
+ -e "s/Hlth Services Outcomes Res Methodology/Hlth Serv Outcomes Res Meth/" \
+ -e "s/International Journal of Technology Assessment in Health Care/Int J Tech Assess Hlth Care/" \
+ -e "s/International Statistical Review/Int Stat Rev/" \
+ -e "s/J Clin Endocrinology Metabolism/J Clin Endocrin Metab/" \
+ -e "s/Journal of Alternative and Complementary Medicine/J Alt Comp Med/" \
+ -e "s/Journal of Applied Econometrics/J Appl Economet/" \
+ -e "s/Journal of Applied Statistics/J Appl Stat/" \
+ -e "s/Journal of Business and Economic Statistics/J Bus Econ Stat/" \
+ -e "s/Journal of Business \\& Economic Statistics/J Bus Econ Stat/" \
+ -e "s/Journal of Consulting and Clinical Psychology/J Cons Clin Psych/" \
+ -e "s/Journal of Econometrics/J Economet/" \
+ -e "s/Journal of Economic Surveys/J Econ Surv/" \
+ -e "s/Journal of Electrocardiology/J Electrocard/" \
+ -e "s/Journal of Endotoxin Research/J Endotox Res/" \
+ -e "s/Journal of General Internal Medicine/J Gen Int Med/" \
+ -e "s/Journal of Health Economics/J Hlth Econ/" \
+ -e "s/Journal of Irreproducible Results/J Irreproduc Results/" \
+ -e "s/Journal of Pediatrics/J Pediatr/" \
+ -e "s/Journal of Pharmacology and Experimental Therapy/J Pharm Exp Ther/" \
+ -e "s/Journal of Statistics Education/J Stat Edu/" \
+ -e "s/Journal of the American College of Cardiology/J Am Coll Cardiol/" \
+ -e "s/Journal of the American Society of Echocardiography/J Am Soc Echocard/" \
+ -e "s/Journal of the American Statistical Association/JASA/" \
+ -e "s/Journal of the National Medical Association/J Nat Med Assoc/" \
+ -e "s/Journal of Trauma/J Trauma/" \
+ -e "s/Journal of Ultrasound Medicine/J Ultrasound Med/" \
+ -e "s/Jurimetrics Journal/Jurimetrics J/" \
+ -e "s/J Wildlife Management/J Wildlife Manage/" \
+ -e "s/Lung Cancer/Lung Ca/" \
+ -e "s/Mass Spectrometry Reviews/Mass Spect Rev/" \
+ -e "s/Med Decision Making/Med Decis Mak/" \
+ -e "s/Medical Decision Making/Med Decis Mak/" \
+ -e "s/Methods of Information in Medicine/Meth Info Med/" \
+ -e "s/Monthly Weather Review/Monthly Weather Rev/" \
+ -e "s/Newsletter of the International Society for Clinical Biostatistics/Newsl Int Soc Clin Biostat/" \
+ -e "s/Pacing and Clinical Electrophysiology/Pacing Clin Electrophys/" \
+ -e "s/Pediatric Infectious Disease Journal/Pediatr Infect Dis J/" \
+ -e "s/Pediatric Research/Pediatr Res/" \
+ -e "s/Physical Therapy/Phys Ther/" \
+ -e "s/PLoS One/PLoS ONE/" \
+ -e "s/Preventive Medicine/Prev Med/" \
+ -e "s/Probability and Mathematical Statistics/Prob Math Stat/" \
+ -e "s/Proceedings of the National Academy of Science/PNAS/" \
+ -e "s/Proc. Natl. Acad. Sci./PNAS/" \
+ -e "s/Proc Natl Acad Sci USA/PNAS/" \
+ -e "s/Psychological Bulletin/Psych Bull/" \
+ -e "s/Psychological Methods/Psych Meth/" \
+ -e "s/Public Opinion Quarterly/Pub Opn Qtr/" \
+ -e "s/Scientific American/Sci Am/" \
+ -e "s/Seminars in Oncology/Sem Onc/" \
+ -e "s/Sociological Methodology/Soc Meth/" \
+ -e "s/Southern Medical Journal/So Med J/" \
+ -e "s/Stat Comp Graphics Newsletter, ASA/Stat Comp Graphics News ASA/" \
+ -e "s/Statistical Science/Stat Sci/" \
+ -e "s/Stats (a publication of the ASA)/Stats/" \
+ -e "s/Surgery/Surg/" \
+ -e "s/Surgical Endoscopy/Surg Endo/" \
+ -e "s/Survey Methodology/Surv Meth/" \
+ -e "s/The Journal of pharmacology and experimental therapeutics/J Pharm Exp Ther/" \
+ -e "s/Theoretical Surgery/Theor Surg/" \
+ -e "s/Transactions of IEEE/Trans IEEE/" \
+ -e "s/Western Journal of Medicine/W J Med/" \
+ > ~/bib/harrelfe.bib
