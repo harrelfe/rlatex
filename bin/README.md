@@ -2,7 +2,7 @@
 
 |*Script*|*Purpose*|
 --------|--------
-| `knitr` | Run R in batch mode, showing progress using the `xless` viewer (`sudo apt-get install xless`); keeps the window open until you kill it or type =Ctrl-c= at the console.  Usage: `knitr foo` to process `foo.Rnw` and create `foo.tex` and graphics files |
+| `knitr` | Run R in batch mode, showing progress using the `xless` viewer (`sudo apt-get install xless`); keeps the window open until you kill it or type `ctrl-c` at the console.  Usage: `knitr foo` to process `foo.Rnw` and create `foo.tex` and graphics files |
 | `knitrn` | Like `knitr` but closes `xless` window as soon as R finishes; useful if you don't expect bugs in the `.Rnw` file |
 | `knitrnf` | Like `knitrn` but to run from a specified directory |
 
