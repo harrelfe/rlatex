@@ -1,0 +1,5 @@
+rm -f messages.txt
+xterm -T "`pwd`/$1.Rnw" -e R --no-save --no-restore -e "require(knitr); knit('$1.Rnw')"
+echo PDF graphics produced:
+ls -lgt *.pdf
+# xless messages.txt &

@@ -1,0 +1,7 @@
+# Usage: knitrnf directoryname scriptname
+# Like knitrn but with directoryname, and scriptname must include the
+# file suffix.  This is useful in Makefiles
+cd $1
+rm -f messages.txt
+xterm -T "`pwd`/$2" -e R --no-save --no-restore -e "require(knitr); knit('$2')"
+
