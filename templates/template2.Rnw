@@ -1,0 +1,18 @@
+% Usage: knitr template2
+<<echo=FALSE>>=
+require(Hmisc)
+knitrSet()
+@
+
+\section{Descriptive Statistics Again}
+<<sum>>=
+getHdata(support)   # Use Hmisc/getHdata to get dataset from VU DataSets wiki
+d <- subset(support, select=c(age,sex,race,edu,income,hospdead,slos,dzgroup,
+                       meanbp,hrt))
+summary(d)
+with(d, hist(age, nclass=25, main=''))
+@
+<<scat>>=
+with(d[1:100,], plot(age, slos))
+@ 
+That was a very concise set of descriptive statistics.

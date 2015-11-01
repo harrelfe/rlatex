@@ -1,0 +1,98 @@
+%Usage: knitr template3
+%       pdflatex template3
+%       biber template3
+%       pdflatex template3
+% To get .R file: R CMD Stangle template3.Rnw = Stangle template3
+\documentclass{article}
+\usepackage[bibloc=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage{knitrl}
+\renewcommand{\cite}[1]{\supercite{#1}}   % put citations as superscript
+\usepackage{url}               % used in bibliography
+
+\title{An Analysis}
+\author{Jane Doe\\\smaller Department of Biostatistics\\\smaller Vanderbilt University School of Medicine}
+\begin{document}
+\maketitle
+% Use the following 3 lines for long reports needing navigation
+\tableofcontents
+%\listoftables
+%\listoffigures     % not used unless figure environments used
+<<echo=FALSE>>=
+require(Hmisc)
+knitrSet()
+@ 
+
+\section{Descriptive Statistics}\label{descStats}
+<<results='asis'>>=
+getHdata(support)   # Use Hmisc/getHdata to get dataset from VU DataSets wiki
+d <- subset(support, select=c(age,sex,race,edu,income,hospdead,slos,dzgroup,
+                       meanbp,hrt))
+latex(describe(d), file='')
+@
+Race is reduced to three levels (white, black, OTHER) because of low
+frequencies in other levels (minimum relative frequency set to 0.05).
+<<>>=
+d <- upData(d,
+            race = combine.levels(race, minlev = 0.05))
+@
+
+\section{Redundancy Analysis and Variable Interrelationships}
+% Note: giving a chunk name to each code chunk that produces a figure
+% makes it easy to know which plots to send to a collaborator, and
+% will not allow numbered orphan plots to be left when code chunks are
+% inserted into the file.  The default in Sweave is for plots to be
+% numbered by the chunks producing them.
+
+<<vc>>=
+v <- varclus(~., data=d)
+plot(v)
+redun(~age+sex+race+edu+income+dzgroup+meanbp+hrt, data=d)
+# Alternative: redun(~., data=subset(d, select=-c(hospdead,slos)))
+@
+Note that the clustering of black with white is not interesting; this just means that these are mutually exclusive higher frequency categories, causing them to be negatively correlated.
+
+\section{Logistic Regression Model}
+Here we fit a tentative binary logistic regression model.  The
+coefficients are not very useful so they are not
+printed.  Note: the symbolic section reference below was created by the
+following \R\ comment:
+\begin{verbatim}
+# see Section (*\ref{descStats}*) for descriptive statistics
+\end{verbatim}
+The label was defined in an earlier section using
+\begin{verbatim}
+\section{Descriptive Statistics}\label{descStats}
+\end{verbatim}
+
+<<lrmpa,results='asis',w=7,h=5>>=
+require(rms)
+dd <- datadist(d); options(datadist='dd')
+f <- lrm(hospdead ~ rcs(age,4) + sex + race + dzgroup + rcs(meanbp,5),
+         data=d) # see Section (*\ref{descStats}*) for descriptive statistics
+print(f, latex=TRUE, coefs=FALSE)
+latex(anova(f), where='h', file='')   # can also try where='htbp'
+ggplot(Predict(f), sepdiscrete='vertical')
+@
+
+\section{Test Calculations}
+<<testp>>=
+x <- 3; y <- 2
+if(x <= y) 'this' else 'that'
+if(y >= x) 'that' else 'this'
+x^y
+plot(runif(20),runif(20))
+@
+
+\section{Computing Environment}
+These analyses were done using the following versions of R\cite{Rsystem}, the
+operating system, and add-on packages \code{Hmisc}\cite{Hmisc},
+\code{rms}\cite{rrms}, and others:
+<<echo=f,results='asis'>>=
+toLatex(sessionInfo(), locale=FALSE)
+@
+
+% Note: Rsystem reference is defined inside feh.bib.  It is a slightly
+% edited version of the output of citation().
+
+\printbibliography[title={References}]
+\end{document}
