@@ -8,10 +8,10 @@
 % \end{document}
 %
 % Option     Default      Meaning
-% citesize   \smaller[3]  Font size for citations [n]
+% citesize   smaller      Font size for citations [n]
 % margin     0.75in       Margins with geometry package, all sides
 % nochappg                Do not use chapter-page page numbers with chappg pkg
-% bibloc     (none)       Full path and name of BiBTeX .bib file
+% bib        (none)       Full path and name of BiBTeX .bib file
 % 
 %
 \NeedsTeXFormat{LaTeX2e}
@@ -24,15 +24,16 @@
 \DeclareOptionX{citesize}{\def\citesize{\csname#1\endcsname}}
 \DeclareOptionX{margin}{\def\margin{#1}}
 \DeclareOptionX{nochappg}{\nochappgtrue}
-\DeclareOptionX{bibloc}{\addbibresource{#1}}
+\DeclareOptionX{bib}{\addbibresource{#1}}
 
-\ExecuteOptionsX{citesize=smaller[3],margin=0.75in}
+\ExecuteOptionsX{citesize=smaller,margin=0.75in}
 \ProcessOptionsX\relax
 
 \RequirePackage{helvet}
 \RequirePackage{color}
 \RequirePackage{graphicx}
 \RequirePackage[font={small,singlespacing}]{caption}
+\RequirePackage{setspace}
 \RequirePackage{relsize}     % For \smaller etc.
 \RequirePackage{needspace}   % needed by print(fit, latex=TRUE)
 \def\need#1 {\vskip 0pt plus #1 \penalty -200 \vskip 0pt plus -#1}

@@ -9,7 +9,7 @@
 % option     Default     Meaning
 % ------     -------     -------
 % margin     1.0in       Margins with geometry package, all sides
-% bibloc     (none)      Full path and name of BiBTeX .bib file
+% bib        (none)      Full path and name of BiBTeX .bib file
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{spaper}[2015/10/30 Style for manuscripts incorporating knitr and author comments]
@@ -17,7 +17,7 @@
 \RequirePackage{xkeyval,relsize,biblatex,lscape,fancyhdr}
 
 \DeclareOptionX{margin}{\def\margin{#1}}
-\DeclareOptionX{bibloc}{\addbibresource{#1}}
+\DeclareOptionX{bib}{\addbibresource{#1}}
 \ExecuteOptionsX{margin=1in}
 \ProcessOptionsX\relax
 

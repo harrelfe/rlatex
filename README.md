@@ -1,7 +1,7 @@
 # rlatex
 ### `LaTeX` Packages and Templates Especially for Use with `R` and `knitr`
 
-The `templates` directory contains templates for using the `LaTeX` packages procided here as well as `knitr` in general.
+The `templates` directory contains templates for using the `LaTeX` packages provided here as well as `knitr` in general.
 
 The `examples` directory contains `knitr` documents (`.Rnw`) that show how to use `LaTeX` with `R`, and also contains `.pdf` files with the output.
 

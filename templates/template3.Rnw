@@ -4,7 +4,7 @@
 %       pdflatex template3
 % To get .R file: R CMD Stangle template3.Rnw = Stangle template3
 \documentclass{article}
-\usepackage[bibloc=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage[bib=/home/harrelfe/bib/harrelfe.bib]{spaper}
 \usepackage{knitrl}
 \renewcommand{\cite}[1]{\supercite{#1}}   % put citations as superscript
 \usepackage{url}               % used in bibliography

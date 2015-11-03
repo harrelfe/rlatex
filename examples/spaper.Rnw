@@ -2,7 +2,7 @@
 % http://biostat.mc.vanderbilt.edu/LaTeXCollab
 
 \documentclass{article}
-\usepackage[bibloc=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage[bib=/home/harrelfe/bib/harrelfe.bib]{spaper}
 \usepackage{knitrl}
 \usepackage{filecontents}   % used if deferring supplemental analyses to
                             % the end of the manuscript or to another document
