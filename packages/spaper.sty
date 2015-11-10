@@ -9,27 +9,28 @@
 %        \end{document}
 %
 % spaper
-% option     Default     Meaning
-% ------     -------     -------
-% margin     1.0in       Margins with geometry package, all sides
-% bib        (none)      Full path and name of BiBTeX .bib file
-% supplement atend       Location for appearance of code and R output
-%                        atend: create \makesupp so user can put at report end
-%                        inline: supp. material appears in place
-%                        sepdoc: supp. material in a separate document
-%                          named \jobname supp.tex (\jobname=base file name)
-% nocomment  false       Suppress printing of comments and side notes
+% option     Default  Meaning
+% ------     -------  -------
+% margin     1.0in    Margins with geometry package, all sides
+% bib        (none)   Full path and name of BiBTeX .bib file
+% supplement atend    Location for appearance of supplemental code and R output
+%                     atend: automatically put at report end
+%                     inline: supp. material appears in place
+%                     sepdoc: supp. material in a separate document
+%                       named \jobname supp.tex (\jobname=base file name)
+% nocomment  false    Suppress printing of comments and side notes
 %
-% When supplement=sepdoc, a file foosupp.tex is created ready for
+% When supplement=sepdoc, a file \jobname supp.tex is created ready for
 % running pdflatex to make pdf file for separate supplemental material
 % LaTeX and code chunks are put in supplemental material when enclosed
 % in \begin{supp} ... \end{supp}
 % If you had any citations in the \begin{supp}...\end{supp} chunks,
-% you will need to run biber \jobname supp after running pdfltex
+% you will need to run biber \jobname supp after running pdflatex
 % \jobname supp.  For example if the master file is foo.Rnw and you
 % run knitr to create foo.tex, \begin{supp} chunk # i will create a
-% separate file named foosuppi.tex where the i is substituted.  If you
-% use supplement=sepdoc another file foosupp.tex is created that 
+% separate file named foosuppi.tex where the i is substituted. 
+% foosupp.tex is automatically created to make a standalone report of
+% supplmental material when sepdoc is in effect.
 
 
 \NeedsTeXFormat{LaTeX2e}
