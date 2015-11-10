@@ -2,6 +2,9 @@
 %        \usepackage[options]{knitrl}
 %        \begin{document}
 %        . . .
+%        \begin{supp}    % LaTeX and code chunks for which to defer output
+%        ...             % to later.  Can have multiple \begin{supp} ...
+%        \end{supp}      % and they need not be contiguous
 %        \printbibliography[title={References}]}
 %        \end{document}
 %
@@ -10,15 +13,37 @@
 % ------     -------     -------
 % margin     1.0in       Margins with geometry package, all sides
 % bib        (none)      Full path and name of BiBTeX .bib file
+% supplement atend       Location for appearance of code and R output
+%                        atend: create \makesupp so user can put at report end
+%                        inline: supp. material appears in place
+%                        sepdoc: supp. material in a separate document
+%                          named \jobname supp.tex (\jobname=base file name)
+% nocomment  false       Suppress printing of comments and side notes
+%
+% When supplement=sepdoc, a file foosupp.tex is created ready for
+% running pdflatex to make pdf file for separate supplemental material
+% LaTeX and code chunks are put in supplemental material when enclosed
+% in \begin{supp} ... \end{supp}
+% If you had any citations in the \begin{supp}...\end{supp} chunks,
+% you will need to run biber \jobname supp after running pdfltex
+% \jobname supp.  For example if the master file is foo.Rnw and you
+% run knitr to create foo.tex, \begin{supp} chunk # i will create a
+% separate file named foosuppi.tex where the i is substituted.  If you
+% use supplement=sepdoc another file foosupp.tex is created that 
+
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{spaper}[2015/10/30 Style for manuscripts incorporating knitr and author comments]
+\ProvidesPackage{spaper}[2015/11/09 Style for manuscripts incorporating knitr and author comments]
 
-\RequirePackage{xkeyval,relsize,biblatex,lscape,fancyhdr}
+\RequirePackage{xkeyval,relsize,biblatex,lscape,fancyhdr,filecontents}
 
 \DeclareOptionX{margin}{\def\margin{#1}}
-\DeclareOptionX{bib}{\addbibresource{#1}}
-\ExecuteOptionsX{margin=1in}
+\DeclareOptionX{bib}{\def\bibfile{#1}\addbibresource{#1}}
+%\define@choicekey*{}{supplement}{atend,inline,sepdoc}{\def\supplement{#1}}
+\DeclareOptionX{supplement}{\def\supplement{#1}}
+\newif\ifnocomment
+\DeclareOptionX{nocomment}{\nocommenttrue}
+\ExecuteOptionsX{margin=1in,supplement=atend}
 \ProcessOptionsX\relax
 
 \usepackage[margin=\margin]{geometry}
@@ -32,12 +57,63 @@
 \newtcbox{\ovbox}{colback=lemonchiffon,boxrule=0pt,arc=5pt,
   boxsep=0pt,left=3pt,right=3pt,top=3pt,bottom=3pt}
 
+\ifnocomment
+\newcommand{\com}[2]{}%
+\newcommand{\snote}[1]{}%
+\else
 \newcommand{\com}[2]{\centerline{\ovbox{\parbox{.9\textwidth}{\smaller#2}}}%
 \marginpar{\textcolor{blue}{\smaller[3]#1}}}
 \newcommand{\snote}[1]{\marginpar{\textcolor{blue}{\smaller[3]#1}}}
-\newcommand{\ignorecom}{%
- \renewcommand{\com}[2]{}%
- \renewcommand{\snote}[1]{}}
+\fi
+
+\ifnum\pdfstrcmp{\supplement}{atend}=0%
+\newcounter{nsupp}%
+\setcounter{nsupp}{0}%
+\newenvironment{supp}{%
+  \addtocounter{nsupp}{1}%
+  \def\suppfilename{\jobname supp\thensupp.tex}%
+  \csname filecontents\endcsname{\suppfilename}%
+}%
+{\csname endfilecontents\endcsname%
+}%
+
+\AtEndDocument{%
+\newcounter{isupp}%
+\setcounter{isupp}{0}%
+\clearpage
+\section{Supplemental Analyses}
+\loop{
+ \addtocounter{isupp}{1}
+ \input{\jobname supp\theisupp}
+}
+\ifnum\value{isupp} < \value{nsupp}
+\repeat
+}
+\fi
+
+\ifnum\pdfstrcmp{\supplement}{inline}=0
+\newenvironment{supp}{}{}
+\def\makesupp{}
+\fi
+
+\ifnum\pdfstrcmp{\supplement}{sepdoc}=0
+\newcounter{nsupp}%
+\setcounter{nsupp}{0}%
+\newwrite\suppfile
+\immediate\openout\suppfile=\jobname supp.tex
+\immediate\write\suppfile{\unexpanded{\documentclass{article}\usepackage[supplement=inline,bib=}\bibfile\unexpanded{]{spaper}\usepackage{knitrl}\title{Supplemental Analysis}\date{\today}\begin{document}\maketitle\tableofcontents}}
+\AtEndDocument{\immediate\write\suppfile{\unexpanded{\printbibliography[title={References}]\end{document}}}%
+ \immediate\closeout\suppfile
+}
+
+\newenvironment{supp}{%
+ \addtocounter{nsupp}{1}%
+ \immediate\write\suppfile{\unexpanded{\input}{\jobname supp\thensupp}}%
+ \csname filecontents\endcsname{\jobname supp\thensupp.tex}%
+}%
+{\csname endfilecontents\endcsname%
+}%
+\fi
 
 \endinput
 

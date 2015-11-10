@@ -2,18 +2,15 @@
 % http://biostat.mc.vanderbilt.edu/LaTeXCollab
 
 \documentclass{article}
-\usepackage[bib=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage[supplement=sepdoc,bib=/home/harrelfe/bib/harrelfe.bib]{spaper}
 \usepackage{knitrl}
-\usepackage{filecontents}   % used if deferring supplemental analyses to
-                            % the end of the manuscript or to another document
 
 % Define particular comment commands for each author so as to automatically
 % include name/initials
 \newcommand{\comfh}[1]{\com{FH}{#1}}
 \newcommand{\comfp}[1]{\com{FP}{#1}}
-% To cause all comments and marginal notes to be suppressed, 
-% uncomment the following line
-%\ignorecom
+% To cause all comments and marginal notes to be suppressed, use
+% \usepackage[nocomment]{spaper}
 
 \renewcommand{\cite}[1]{\supercite{#1}}   % make citations use superscripts
 
@@ -32,7 +29,7 @@
 
 <<echo=FALSE>>=
 require(rms)
-knitrSet(echo=TRUE)   # set echo=FALSE to not print code
+knitrSet(echo=TRUE,cache=TRUE)   # set echo=FALSE to not print code
 lan <- function(a, ...) latex(a, file='', table.env=FALSE, ...)
 @
 
@@ -53,7 +50,9 @@ This section is for the Supplemental Material  section.  Code that
 goes below is executed in the original order of appearance, not at the
 end.  But the code and its output appear only at the end.
 
-\begin{filecontents}{\jobname.sup}    % Here jobname=spaper
+% The following creates \jobname supp1.tex (here spapersupp1.tex)
+% Note: you cannot put anything else on the next line (e.g., comment)
+\begin{supp}
 <<datadens,h=3,w=4>>=
 datadensity(FEV)
 @ 
@@ -61,16 +60,17 @@ datadensity(FEV)
 <<miscplot>>=
 plot(runif(10))
 @ 
-\end{filecontents}
+\end{supp}
 
-\begin{filecontents}{\jobname2.sup}   % Creates spaper2.sup
+% The following creates spapersupp2.tex
+\begin{supp}
 If you need to run \R\ code in disconnected portions of the document,
 create new output file names as done here.
 <<miscplot2>>=
 plot(runif(10), col='red')
 2+pi
 @ 
-\end{filecontents}
+\end{supp}
 
 \section{FEV vs.\ Age}
 Figure~\ref{fig:plot} shows the raw data for some of the key variables.
@@ -85,9 +85,8 @@ ggplot(FEV, aes(x=age, y=fev, color=sex)) + geom_point()
 
 \printbibliography[title={Bibliography}]
 
-\section{Supplemental Material}
-
-\subsection{Computing Environment}
+\begin{supp}
+\section{Computing Environment}
 These analyses were done using the following versions of R\cite{Rsystem}, the
 \snote{CHECK}
 operating system, and add-on packages \code{Hmisc}\cite{Hmisc},
@@ -97,23 +96,17 @@ toLatex(sessionInfo(), locale=FALSE)
 @
 The reproducible research framework \code{knitr}~\cite{knitr} was used.
 
-% To print all code in an appendix if you used knitrSet(echo=FALSE),
-% use the following
-
-\subsection{All \R\ Code}
+\section{All \R\ Code}
 <<all-code, ref.label=all_labels(), echo=TRUE, eval=FALSE>>=
 @ 
+\end{supp}
 
-\subsection{Supplemental Analyses}
-% Include thist subsection if you used \filecontents above
-\input{\jobname.sup}
-\input{\jobname2.sup}
+\makesupp
 
 % You can also have LaTeX made a separate pdf file for the
-% supplemental analyses - see spapersub.tex
-% Omit the two \input{} above if doing this
-% To produce the final pdf supplemental report you run pdflatex spapersub
-% and do not run R or knitr as this was already done when you run spaper.Rnw
+% supplemental analyses using \usepackage[supplements=sepdoc]{spaper}
+% This creates \jobname supp.tex (here spapersupp.tex) ready to run with
+% pdflatex (without running knitr) when you run \makesupp.
 
 \end{document}
 

@@ -13,5 +13,14 @@ plot-1.pdf
 spaper.run.xml
 spaper.tex
 spaper.toc
-spapersup.aux
-spapersup.log
+spapersupp.aux
+spapersupp.bbl
+spapersupp.bcf
+spapersupp.blg
+spapersupp.log
+spapersupp.run.xml
+spapersupp.toc
+spapersupp1.tex
+spapersupp2.tex
+spapersupp3.tex
+spapersupp4.tex
