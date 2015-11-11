@@ -101,8 +101,6 @@ The reproducible research framework \code{knitr}~\cite{knitr} was used.
 @ 
 \end{supp}
 
-\makesupp
-
 % You can also have LaTeX made a separate pdf file for the
 % supplemental analyses using \usepackage[supplements=sepdoc]{spaper}
 % This creates \jobname supp.tex (here spapersupp.tex) ready to run with
