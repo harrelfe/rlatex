@@ -2,6 +2,11 @@
 %        \usepackage[options]{knitrl}
 %        \begin{document}
 %        . . .
+%        \com{author initials}{multi-line comment}
+%        \snote{short marginal note or author initials}
+%        \code{variable or function names or short code to typeset in
+%         monspace font}
+%        ... using the \R\ system ...       
 %        \begin{supp}    % LaTeX and code chunks for which to defer output
 %        ...             % to later.  Can have multiple \begin{supp} ...
 %        \end{supp}      % and they need not be contiguous
@@ -31,10 +36,14 @@
 % separate file named foosuppi.tex where the i is substituted. 
 % foosupp.tex is automatically created to make a standalone report of
 % supplmental material when sepdoc is in effect.
-
-
+%
+% spaper.sty defines commands and symbols \com, \snote, \code, \R (seeabove)
+% This package requires the following other packages:
+%  xkeyval, relsize, biblatex, lscape, fancyhdr, filecontents,
+%  geometry, tcolorbox
+%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{spaper}[2015/11/09 Style for manuscripts incorporating knitr and author comments]
+\ProvidesPackage{spaper}[2015/11/11 Style for manuscripts incorporating knitr and author comments]
 
 \RequirePackage{xkeyval,relsize,biblatex,lscape,fancyhdr,filecontents}
 

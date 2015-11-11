@@ -2,7 +2,7 @@
 % http://biostat.mc.vanderbilt.edu/LaTeXCollab
 
 \documentclass{article}
-\usepackage[supplement=sepdoc,bib=/home/harrelfe/bib/harrelfe.bib]{spaper}
+\usepackage[supplement=sepdoc,bib=Rrelated.bib]{spaper}
 \usepackage{knitrl}
 
 % Define particular comment commands for each author so as to automatically
@@ -94,7 +94,8 @@ operating system, and add-on packages \code{Hmisc}\cite{Hmisc},
 <<sinfo,echo=FALSE,results='asis'>>=
 toLatex(sessionInfo(), locale=FALSE)
 @
-The reproducible research framework \code{knitr}~\cite{knitr} was used.
+The reproducible research framework
+\code{knitr}~\cite{knitr,knitrbook} was used. 
 
 \section{All \R\ Code}
 <<all-code, ref.label=all_labels(), echo=TRUE, eval=FALSE>>=
