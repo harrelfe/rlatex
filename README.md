@@ -33,4 +33,4 @@ To find out where to put add-on `LaTeX` packages, at the command line type
 ```
 kpsepath tex | tr : '\n'
 ```
-and see which paths end in two or three slashes.  Pick one that is in your home area if you want to keep things simple.  `irlatex` assumes `~/texmf/tex`.
+and see which paths end in two or three slashes.  That way you will not need to run the `mktexlsr` program if you update the local styles.  Pick a directory that is in your home area if you want to keep things simple.  `irlatex` assumes `~/texmf/tex`.
