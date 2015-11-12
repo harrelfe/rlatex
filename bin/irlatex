@@ -1,8 +1,10 @@
 #!/bin/bash
-cd /tmp
+mkdir ~/texmf
+mkdir ~/texmf/tex
+cd ~/texmf/tex
 rm -f *.sty
 wget https://raw.githubusercontent.com/harrelfe/rlatex/master/packages/knitrl.sty
 wget https://raw.githubusercontent.com/harrelfe/rlatex/master/packages/hslide.sty
 wget https://raw.githubusercontent.com/harrelfe/rlatex/master/packages/spaper.sty
-sudo cp *.sty /usr/share/texmf/tex/latex/
-sudo mktexlsr
+
+

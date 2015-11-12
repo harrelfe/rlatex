@@ -27,7 +27,10 @@ wget https://raw.githubusercontent.com/harrelfe/rlatex/master/bin/irlatex
 chmod +x irlatex
 ```
 
-Then from any directory run the command `irlatex` which will download and install on your central `LaTeX` system all of the packages stored here.
+Then from any directory run the command `irlatex` which will download and install in your personal central `LaTeX` package system all of the packages stored here.
 
-
-
+To find out where to put add-on `LaTeX` packages, at the command line type
+```
+kpsepath tex | tr : '\n'
+```
+and see which paths end in two or three slashes.  Pick one that is in your home area if you want to keep things simple.  `irlatex` assumes `~/texmf/tex`.
