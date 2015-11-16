@@ -105,7 +105,7 @@ The reproducible research framework
 % You can also have LaTeX made a separate pdf file for the
 % supplemental analyses using \usepackage[supplements=sepdoc]{spaper}
 % This creates \jobname supp.tex (here spapersupp.tex) ready to run with
-% pdflatex (without running knitr) when you run \makesupp.
+% pdflatex (without running knitr).
 
 \end{document}
 
