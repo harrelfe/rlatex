@@ -29,7 +29,10 @@
 \ExecuteOptionsX{citesize=smaller,margin=0.75in}
 \ProcessOptionsX\relax
 
-\RequirePackage{helvet}
+%\RequirePackage{helvet}
+\RequirePackage{lmodern}
+\renewcommand*\familydefault{\sfdefault}
+\RequirePackage[T1]{fontenc}
 \RequirePackage{color}
 \RequirePackage{graphicx}
 \RequirePackage[font={small,singlespacing}]{caption}
@@ -104,6 +107,3 @@
 \RequirePackage{breakurl}
 
 \endinput
-
-sudo cp ~/doc/latex/texinput/hslide.sty /usr/share/texmf/tex/latex/.
-sudo mktexlsr
