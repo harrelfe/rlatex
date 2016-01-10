@@ -13,9 +13,16 @@
 % nochappg                Do not use chapter-page page numbers with chappg pkg
 % bib        (none)       Full path and name of BiBTeX .bib file
 % 
+% To put an audio cue counter in the right margin for \item within an
+% itemize environment, use:
+% \bic{short label, e.g. A}
+% \itemc ....    will have e.g. A1 in right margin, in red
+% \itemc ....    will have e.g. A2 in red
+% \eic
 %
+ 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{hslide}[2015/10/28 Handouts/Slides Compromise Style]
+\ProvidesPackage{hslide}[2016/01/09 Handouts/Slides Compromise Style]
 \RequirePackage{xkeyval}
 
 \RequirePackage[backref=true]{biblatex}
@@ -76,8 +83,20 @@
 
 \newcommand{\be}{\begin{enumerate}}
 \newcommand{\ee}{\end{enumerate}}
+
 \newcommand{\bi}{\begin{itemize}}
 \newcommand{\ei}{\end{itemize}}
+
+\newcounter{nitemize}%
+
+\newcommand{\itemc}{%
+ \stepcounter{nitemize}%
+ \item \marginpar{~\hfill\textcolor{red}{\scriptsize\itemizecue\thenitemize}} %
+}
+
+\newcommand{\bic}[1]{\def\itemizecue{#1}\setcounter{nitemize}{0}\begin{itemize}}
+\newcommand{\eic}{\end{itemize}\def\itemizecue{}}
+
 \newcommand{\beq}{\[}
 \newcommand{\eeq}{\]}
 \newcommand{\beqa}{\begin{eqnarray*}}
