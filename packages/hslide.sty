@@ -19,6 +19,8 @@
 % \itemc ....    will have e.g. A1 in right margin, in red
 % \itemc ....    will have e.g. A2 in red
 % \eic
+% \acue{short label} puts short label as an audio cue in the right
+% margin without a counter added; typically placed in first \item
 %
  
 \NeedsTeXFormat{LaTeX2e}
@@ -89,12 +91,17 @@
 
 \newcounter{nitemize}%
 
+\newcommand{\acue}[1]{\marginpar{\hfill\textcolor{red}{\scriptsize#1}}}
 \newcommand{\itemc}{%
  \stepcounter{nitemize}%
- \item \marginpar{~\hfill\textcolor{red}{\scriptsize\itemizecue\thenitemize}} %
+ \item \acue{\itemizecue\thenitemize}%
 }
 
-\newcommand{\bic}[1]{\def\itemizecue{#1}\setcounter{nitemize}{0}\begin{itemize}}
+\newcommand{\bic}[1]{%
+ \def\itemizecue{#1}%
+ \setcounter{nitemize}{0}%
+ \begin{itemize}%
+}
 \newcommand{\eic}{\end{itemize}\def\itemizecue{}}
 
 \newcommand{\beq}{\[}
