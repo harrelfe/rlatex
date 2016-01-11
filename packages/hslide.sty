@@ -27,6 +27,10 @@
 % \bia ... \eia    \bea ... \eea    \bda ... \eda
 % This package also defines plane commands that do not generate cues:
 % \bi ... \ei    \be ... \ee
+% For equation arrays the commands are \bequa ... \eequa and ordinary 
+% unmarked versions \beq ... \eeq
+%
+% To increment and print the audio cue letter at any point, type \ipacue
  
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hslide}[2016/01/09 Handouts/Slides Compromise Style]
@@ -95,43 +99,43 @@
 \newcounter{nitem}%
 
 \newcommand{\acue}[1]{\marginpar{\hfill\textcolor{red}{\scriptsize#1}}}
+\newcommand{\ipacue}{%
+ \ifnum\value{nitemize} = 26%
+  \setcounter{nitemize}{0}%
+  \fi%
+ \stepcounter{nitemize}%
+ \acue{\Alph{nitemize}}%
+}
+
 \newcommand{\itemc}{%
  \stepcounter{nitem}%
  \item \acue{\itemizecue\thenitem}%
 }
 
 \newcommand{\bia}{%
- \ifnum\value{nitemize} = 26%
-  \setcounter{nitemize}{0}%
-  \fi%
- \stepcounter{nitemize}%
  \renewcommand{\labelitemi}{\Huge$\cdot$}%
  \begin{itemize} \setlength{\itemsep}{3ex}%
- \acue{\Alph{nitemize}}%
+ \ipacue%
 }
 \newcommand{\eia}{\end{itemize}}
 
 \newcommand{\bea}{%
- \ifnum\value{nitemize} = 26%
-  \setcounter{nitemize}{0}%
-  \fi%
- \stepcounter{nitemize}%
  \begin{enumerate}%
- \acue{\Alph{nitemize}}%
+ \ipacue%
 }
 \newcommand{\eea}{\end{enumerate}}
 
 \newcommand{\bda}{%
- \ifnum\value{nitemize} = 26%
-  \setcounter{nitemize}{0}%
-  \fi%
- \stepcounter{nitemize}%
  \begin{description}%
- \acue{\Alph{nitemize}}%
+ \ipacue%
 }
 \newcommand{\eda}{\end{description}}
 
-
+\newcommand{\bequa}{
+ \ipacue%
+ \begin{eqnarray*}%
+}
+\newcommand{\eequa}{\end{eqnarray*}}
 
 \newcommand{\bic}[1]{%
  \def\itemizecue{#1}%
