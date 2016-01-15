@@ -31,6 +31,11 @@
 % unmarked versions \beq ... \eeq
 %
 % To increment and print the audio cue letter at any point, type \ipacue
+%
+% If setting marginparsep as a negative number, issue the following
+% before using \bia etc.:
+%\renewcommand{\mpfill}{\hfill}
+
  
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hslide}[2016/01/09 Handouts/Slides Compromise Style]
@@ -98,7 +103,9 @@
 \newcounter{nitemize}[chapter]%
 \newcounter{nitem}%
 
-\newcommand{\acue}[1]{\marginpar{\hfill\textcolor{red}{\scriptsize#1}}}
+\def\mpfill{}
+
+\newcommand{\acue}[1]{\marginpar{\mpfill\textcolor{red}{\scriptsize#1}}}
 \newcommand{\ipacue}{%
  \ifnum\value{nitemize} = 26%
   \setcounter{nitemize}{0}%
@@ -113,7 +120,7 @@
 }
 
 \newcommand{\bia}{%
- \renewcommand{\labelitemi}{\Huge$\cdot$}%
+ \renewcommand{\labelitemi}{\huge\textbullet}%
  \begin{itemize} \setlength{\itemsep}{3ex}%
  \ipacue%
 }
@@ -145,7 +152,7 @@
 \newcommand{\eic}{\end{itemize}\def\itemizecue{}}
 
 % Itemize that doesn't generate audio cue
-\newcommand{\bi}{\renewcommand{\labelitemi}{\Huge$\cdot$}\begin{itemize}\setlength{\itemsep}{3ex}}
+\newcommand{\bi}{\renewcommand{\labelitemi}{\huge\textbullet}\begin{itemize}\setlength{\itemsep}{3ex}}
 \newcommand{\ei}{\end{itemize}}
 
 \newcommand{\beq}{\[}
@@ -165,7 +172,7 @@
 
 %Optimize for note-taking
 \newenvironment{itmz}{
- \renewcommand{\labelitemi}{\Huge$\cdot$}
+ \renewcommand{\labelitemi}{\huge\textbullet}
  \begin{itemize} \setlength{\itemsep}{3ex}}
  {\end{itemize}}
 
