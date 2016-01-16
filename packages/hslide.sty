@@ -24,11 +24,10 @@
 %
 % To automatically increment and use A B C ... for audio cues for each
 % new itemize, enumerate, description environments use:
-% \bia ... \eia    \bea ... \eea    \bda ... \eda
-% This package also defines plane commands that do not generate cues:
-% \bi ... \ei    \be ... \ee
-% For equation arrays the commands are \bequa ... \eequa and ordinary 
-% unmarked versions \beq ... \eeq
+% \def\apacue{1}
+% \bi ... \ei    \be ... \ee    \bd ... \ed
+% Usually you put \def\apacue{1} at the beginning of a chapter and
+% \def\apacue{0} at the end.  apacue is initialized at zero.
 %
 % To increment and print the audio cue letter at any point, type \ipacue
 %
@@ -38,7 +37,7 @@
 
  
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{hslide}[2016/01/09 Handouts/Slides Compromise Style]
+\ProvidesPackage{hslide}[2016/01/16 Handouts/Slides Compromise Style]
 \RequirePackage{xkeyval}
 
 \RequirePackage[backref=true]{biblatex}
@@ -62,6 +61,7 @@
 \RequirePackage{setspace}
 \RequirePackage{relsize}     % For \smaller etc.
 \RequirePackage{needspace}   % needed by print(fit, latex=TRUE)
+\RequirePackage{enumitem}    % needed here
 \def\need#1 {\vskip 0pt plus #1 \penalty -200 \vskip 0pt plus -#1}
 
 
@@ -96,53 +96,41 @@
 
 \DeclareGraphicsExtensions{.pdf, .jpg, .png}
 
-
-\newcommand{\be}{\begin{enumerate}}
-\newcommand{\ee}{\end{enumerate}}
-
-\newcounter{nitemize}[chapter]%
-\newcounter{nitem}%
-
 \def\mpfill{}
+\def\apacue{0}   % automatic incrementing and printing of audio cues
 
 \newcommand{\acue}[1]{\marginpar{\mpfill\textcolor{red}{\scriptsize#1}}}
 \newcommand{\ipacue}{%
+\ifnum\apacue=1%
  \ifnum\value{nitemize} = 26%
   \setcounter{nitemize}{0}%
   \fi%
  \stepcounter{nitemize}%
  \acue{\Alph{nitemize}}%
+\fi%
 }
+
+% see http://tex.stackexchange.com/questions/287845/determining-whether-a-line-is-inside-an-itemize-or-enumerate-environment
+\newif\ifinside
+\setlist[itemize,enumerate,description,1]{before*={\ifinside\relax\else\ipacue\insidetrue\fi},after*={\insidefalse}}
+
+\setitemize{itemsep=2ex,topsep=7pt,label={\huge\textbullet}}
+
+\newcounter{nitemize}[chapter]%
+\newcounter{nitem}%
+
 
 \newcommand{\itemc}{%
  \stepcounter{nitem}%
  \item \acue{\itemizecue\thenitem}%
 }
 
-\newcommand{\bia}{%
- \renewcommand{\labelitemi}{\huge\textbullet}%
- \begin{itemize} \setlength{\itemsep}{3ex}%
- \ipacue%
-}
-\newcommand{\eia}{\end{itemize}}
-
-\newcommand{\bea}{%
- \begin{enumerate}%
- \ipacue%
-}
-\newcommand{\eea}{\end{enumerate}}
-
-\newcommand{\bda}{%
- \begin{description}%
- \ipacue%
-}
-\newcommand{\eda}{\end{description}}
-
-\newcommand{\bequa}{
- \ipacue%
- \begin{eqnarray*}%
-}
-\newcommand{\eequa}{\end{eqnarray*}}
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\def\be{\begin{enumerate}}
+\def\ee{\end{enumerate}}
+\def\bd{\begin{description}}
+\def\ed{\end{description}}
 
 \newcommand{\bic}[1]{%
  \def\itemizecue{#1}%
@@ -152,8 +140,8 @@
 \newcommand{\eic}{\end{itemize}\def\itemizecue{}}
 
 % Itemize that doesn't generate audio cue
-\newcommand{\bi}{\renewcommand{\labelitemi}{\huge\textbullet}\begin{itemize}\setlength{\itemsep}{3ex}}
-\newcommand{\ei}{\end{itemize}}
+%\newcommand{\bi}{\renewcommand{\labelitemi}{\huge\textbullet}\begin{itemize}\setlength{\itemsep}{3ex}}
+%\newcommand{\ei}{\end{itemize}}
 
 \newcommand{\beq}{\[}
 \newcommand{\eeq}{\]}
@@ -169,12 +157,6 @@
 
 \setstretch{1}  % so that doublespace.sty will only apply when
                 % \begin{spacing} in effect
-
-%Optimize for note-taking
-\newenvironment{itmz}{
- \renewcommand{\labelitemi}{\huge\textbullet}
- \begin{itemize} \setlength{\itemsep}{3ex}}
- {\end{itemize}}
 
 \pagestyle{headings}
 
