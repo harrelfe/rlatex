@@ -1,7 +1,7 @@
 % Usage:
 % \usepackage[options]{hslide}
 % \begin{document}
-% \Huge
+% \huge
 % \pagenumbering{bychapter}
 % ...
 % \dobib
@@ -99,7 +99,7 @@
 \def\mpfill{}
 \def\apacue{0}   % automatic incrementing and printing of audio cues
 
-\newcommand{\acue}[1]{\marginpar{\mpfill\textcolor{red}{\scriptsize#1}}}
+\newcommand{\acue}[1]{\marginpar{\mpfill\textcolor{red}{\small#1}}}
 \newcommand{\ipacue}{%
 \ifnum\apacue=1%
  \ifnum\value{nitemize} = 26%
@@ -114,7 +114,7 @@
 \newif\ifinside
 \setlist[itemize,enumerate,description,1]{before*={\ifinside\relax\else\ipacue\insidetrue\fi},after*={\insidefalse}}
 
-\setitemize{itemsep=2ex,topsep=7pt,label={\huge\textbullet}}
+\setitemize{itemsep=2ex,topsep=7pt} %,label={\huge\textbullet}}
 
 \newcounter{nitemize}[chapter]%
 \newcounter{nitem}%
