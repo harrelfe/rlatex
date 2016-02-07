@@ -87,6 +87,7 @@
 {\csname endfilecontents\endcsname%
 }%
 
+\ifnum\value{nsupp} > 0
 \AtEndDocument{%
 \newcounter{isupp}%
 \setcounter{isupp}{0}%
@@ -124,11 +125,5 @@
 }%
 \fi
 
+\fi     % end \ifnum\value{nsupp} > 0
 \endinput
-
-sudo cp ~/doc/latex/texinput/spaper.sty /usr/share/R/share/texmf/.
-sudo mktexlsr
-
-To update on wiki:
-cp -p spaper.sty /tmp
-browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.sty;revInfo=1
