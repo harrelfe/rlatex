@@ -6,7 +6,7 @@
 %        \snote{short marginal note or author initials}
 %        \code{variable or function names or short code to typeset in
 %         monspace font}
-%        ... using the \R\ system ...       
+%        ... using the \R\ system ...
 %        \begin{supp}    % LaTeX and code chunks for which to defer output
 %        ...             % to later.  Can have multiple \begin{supp} ...
 %        \end{supp}      % and they need not be contiguous
@@ -33,7 +33,7 @@
 % you will need to run biber \jobname supp after running pdflatex
 % \jobname supp.  For example if the master file is foo.Rnw and you
 % run knitr to create foo.tex, \begin{supp} chunk # i will create a
-% separate file named foosuppi.tex where the i is substituted. 
+% separate file named foosuppi.tex where the i is substituted.
 % foosupp.tex is automatically created to make a standalone report of
 % supplmental material when sepdoc is in effect.
 %
@@ -86,9 +86,8 @@
 }%
 {\csname endfilecontents\endcsname%
 }%
-
-\ifnum\value{nsupp} > 0
 \AtEndDocument{%
+\ifnum\value{nsupp} > 0
 \newcounter{isupp}%
 \setcounter{isupp}{0}%
 \clearpage
@@ -99,8 +98,9 @@
 }
 \ifnum\value{isupp} < \value{nsupp}
 \repeat
-}
-\fi
+\fi % end \ifnum\value{nsupp} > 0
+}   % end AtEndDocument
+\fi    % end atend
 
 \ifnum\pdfstrcmp{\supplement}{inline}=0
 \newenvironment{supp}{}{}
@@ -125,5 +125,4 @@
 }%
 \fi
 
-\fi     % end \ifnum\value{nsupp} > 0
 \endinput

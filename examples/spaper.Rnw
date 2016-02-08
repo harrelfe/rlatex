@@ -20,7 +20,7 @@
     \texttt{f.harrell@vanderbilt.edu}}
   \and
   Fictitious Person\thanks{Department of Irreproducible Research,
-    Slapout College, 
+    Slapout College,
     \texttt{fp@sloppy.com}}}
 \date{\today}
 \begin{document}
@@ -37,7 +37,7 @@ lan <- function(a, ...) latex(a, file='', table.env=FALSE, ...)
 <<desc,results='asis'>>=
 getHdata(FEV)
 latex(describe(FEV), file='')
-@ 
+@
 \comfh{I have a question about the data.  Do all the values make sense?
   Are these data applicable to our research question?  Did we really
   land a man on the moon?}
@@ -55,11 +55,11 @@ end.  But the code and its output appear only at the end.
 \begin{supp}
 <<datadens,h=3,w=4>>=
 datadensity(FEV)
-@ 
+@
 
 <<miscplot>>=
 plot(runif(10))
-@ 
+@
 \end{supp}
 
 % The following creates spapersupp2.tex
@@ -69,14 +69,14 @@ create new output file names as done here.
 <<miscplot2>>=
 plot(runif(10), col='red')
 2+pi
-@ 
+@
 \end{supp}
 
 \section{FEV vs.\ Age}
 Figure~\ref{fig:plot} shows the raw data for some of the key variables.
 <<plot,w=5.5,h=3.75,cap='Scatterplot of age vs.\ FEV stratified by sex'>>=
 ggplot(FEV, aes(x=age, y=fev, color=sex)) + geom_point()
-@ 
+@
 \comfh{\textbf{TO DO}:
   \begin{enumerate}
     \item See if other variables need to be accounted for
@@ -95,11 +95,11 @@ operating system, and add-on packages \code{Hmisc}\cite{Hmisc},
 toLatex(sessionInfo(), locale=FALSE)
 @
 The reproducible research framework
-\code{knitr}~\cite{knitr,knitrbook} was used. 
+\code{knitr}~\cite{knitr,knitrbook} was used.
 
 \section{All \R\ Code}
 <<all-code, ref.label=all_labels(), echo=TRUE, eval=FALSE>>=
-@ 
+@
 \end{supp}
 
 % You can also have LaTeX made a separate pdf file for the
@@ -108,9 +108,3 @@ The reproducible research framework
 % pdflatex (without running knitr).
 
 \end{document}
-
-
-To update wiki:
-cp -p spaper.* /tmp
-browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.pdf;revInfo=1
-browser http://biostat.mc.vanderbilt.edu/wiki/bin/attach/Main/LaTeXCollab?filename=spaper.Rnw;revInfo=1

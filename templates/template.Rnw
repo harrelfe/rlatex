@@ -18,7 +18,7 @@
 %\listoftables
 %\listoffigures     % not used unless figure environments used
 <<echo=FALSE>>=
-require(rms)
+require(rms)   # knitrSet is in Hmisc.  rms brings in Hmisc
 knitrSet()
 @
 
