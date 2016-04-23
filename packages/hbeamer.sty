@@ -1,0 +1,87 @@
+% Usage:
+% \def\handout{0}   % set to 1 to produce 4-up handouts instead of slides
+% \ifnum\handout=1
+% \documentclass[handout,13pt,compress,c]{beamer}
+% \else
+% \documentclass[13pt,compress,c]{beamer}
+% \fi
+
+% \usepackage[options]{hbeamer}
+% \title{....}
+% \author[]{First Last}
+% \institute{Department of Biostatistics\\Vanderbilt University School
+%            of Medicine}
+% \date{\textcolor{blue}{\textsc{Meeting Name\hfill\smaller 2016-04-22}}}
+% \begin{document}
+% \frame{\titlepage}
+%
+% ...
+% \dobib
+% \end{document}
+%
+% Option     Default      Meaning
+% bib        (none)       Full path and name of BiBTeX .bib file
+% logo       (none)       Full path and name of logo image file
+% 
+
+ 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hbeamer}[2016/04/22 Beamer Style for knitr]
+\RequirePackage{xkeyval}
+\RequirePackage[style=authoryear,giveninits=true,doi=false,url=false,maxbibnames=3,maxcitenames=3,backend=biber,backref=true]{biblatex}
+\DeclareOptionX{logo}{\logo{\includegraphics[width=.123\textwidth]{#1}}}
+\DeclareOptionX{bib}{\addbibresource{#1}}
+\ProcessOptionsX\relax
+
+\ifnum\handout=1  % see above for an alternative which uses two preamble files
+\usepackage{pgfpages}
+\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=4mm]
+\fi
+
+\usetheme{PaloAlto}
+\setbeamercolor{normal text}{bg=blue!5}
+
+
+\RequirePackage{graphicx}
+\RequirePackage{setspace}
+\RequirePackage{relsize}     % For \smaller etc.
+\RequirePackage{url}
+
+% Adds annote fields to bibliography:
+\renewbibmacro{finentry}{\finentry%
+   \iffieldundef{annotation}
+      {}
+      {\par\medskip{\smaller\begin{spacing}{0.7}\printfield{annotation}\end{spacing}}\finentry}}
+% See http://tex.stackexchange.com/questions/146766/biblatex-referencing-using-ieee-style-with-annotations
+
+\def\dobib{\clearpage%
+\begin{center}
+\large\textbf{References}
+\end{center}
+\renewcommand*{\bibfont}{\small}
+\printbibliography[title={Bibliography}]
+}
+
+\DeclareGraphicsExtensions{.pdf, .jpg, .png}
+
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\def\be{\begin{enumerate}}
+\def\ee{\end{enumerate}}
+\def\bd{\begin{description}}
+\def\ed{\end{description}}
+
+\newcommand{\ra}{$\rightarrow \ $}
+\newcommand{\R}{{\normalfont\textsf{R}}{}}
+\newcommand{\etal}{{\em et al.}}
+
+\newcommand{\ft}[1]{\frametitle{#1}}
+\newcommand{\code}[1]{\texttt{\smaller #1}}
+
+\newcommand{\foot}[1]{
+\vfill
+\textcolor{blue}{\smaller[2] #1}}
+
+\logo{\includegraphics[width=.123\textwidth]{/home/harrelfe/doc/images/biostatLogo.jpg}}
+
+\endinput
