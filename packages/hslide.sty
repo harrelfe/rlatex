@@ -37,7 +37,7 @@
 
  
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{hslide}[2016/01/16 Handouts/Slides Compromise Style]
+\ProvidesPackage{hslide}[2016/05/28 Handouts/Slides Compromise Style]
 \RequirePackage{xkeyval}
 
 \RequirePackage[backref=true]{biblatex}
@@ -64,6 +64,24 @@
 \RequirePackage{enumitem}    % needed here
 \def\need#1 {\vskip 0pt plus #1 \penalty -200 \vskip 0pt plus -#1}
 
+\RequirePackage{titlesec}
+% See http://tex.stackexchange.com/questions/109838
+\newcommand{\sectionbreak}{\clearpage}
+\titleformat{\section}[frame]
+  {\Huge\bfseries\sffamily}
+  {\Large\thesection}
+  {0em}
+  {\color{blue}}
+\titleformat{\subsection}[frame]
+  {\huge\bfseries\sffamily}
+  {\large\thesubsection}
+  {0em}
+  {\color{blue}}
+\titleformat{\subsubsection}[frame]
+  {\LARGE\bfseries\sffamily}
+  {\large\thesubsubsection}
+  {0em}
+  {\color{blue}}
 
 % Citations in [] and smaller than usual
 \renewcommand*{\citesetup}{%
