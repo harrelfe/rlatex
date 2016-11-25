@@ -1,0 +1,77 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{marchange}[2016/11/25 Indicate document changes using
+symbols in marginal notes]
+
+% Macro changes: defines commands \cbstart* to use a right margin symbol
+% for different edits (e.g. on different days) having their own color
+% and symbol.  A starting symbol (e.g., down arrow) signifies the
+% beginning and a changed section and an ending symbol (e.g., up
+% arrow) indicates the end.  Unlike the changebar package, this
+% approach allows more than 4 colors or color/symbol combinations, and
+% since no special processing is done, will span any number of pages
+% and not require `latex` to be run twice. Change marking can be
+% turned off without removing /cbstart* and /cbend* commands from the
+% text.  This is done by setting the variable showchanges to 0.  If
+% showchanges is 1, a tabular table of changes is included.
+%
+% Usage: 
+%  \begin{document}
+%  . . .
+%  \def\showchanges{1}    or {0} to turn off change marking
+%  \bchangestab
+%  \changes{a}{color}{start symbol}{end symbol}{date}{description}
+%  \changes{b}{color}{start symbol}{end symbol}{date}{description}
+%  . . .
+%  \echangestab
+%
+%  \cbstarta
+%  . . . new text
+%  \cbenda
+%  . . .
+%  \cbstartb
+%  . . . new text
+%  \cbendb
+%
+% Suggested symbol pairs:
+% \top \bot  \downarrow \uparrow  \cap \cup  \sqcap \sqcup  \wedge \vee
+% \bigtriangledown \bigtriangleup  \Uparrow \Downarrow
+
+% \gdef instead of \newcommand because inside tabular only local definitions
+% are formed with newcommand - see
+% http://tex.stackexchange.com/questions/117928
+
+\def\showchanges{1}
+%\setlength\marginparwidth{2ex}
+%\setlength\marginparsep{20pt}
+
+\newcommand{\changes}[6]{%
+ \ifnum\showchanges=1
+  \expandafter\gdef\csname cbstart#1\endcsname{\marginpar{\textcolor{#2}{$#3$}}}%
+  \textcolor{#2}{$#3 #4$} & #5 & \parbox{3.5in}{#6} \\
+  & & \\
+  \expandafter\gdef\csname cbend#1\endcsname{\marginpar{\textcolor{#2}{$#4$}}}%
+ \else
+ \expandafter\gdef\csname cbstart#1\endcsname{}%
+ \expandafter\gdef\csname cbend#1\endcsname{}%
+ \fi
+}
+
+\newcommand{\bchangestab}{%
+\ifnum\showchanges=1
+\medskip
+\paragraph{Document Changes}
+~\\
+\begin{center}
+\begin{tabular}{ccl} \hline
+  Symbol in    & Date & Description \\
+  Right Margin &      &             \\ \hline
+\fi
+}
+\newcommand{\echangestab}{%
+\ifnum\showchanges=1
+\\  \hline
+\end{tabular}\end{center}
+\fi
+}
+
+\endinput

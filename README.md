@@ -15,11 +15,14 @@ The `bin` directory contains `Linux/Unix` shell command helper scripts, e.g., `i
 | `knitrl.sty` | For use with `knitr` allowing pretty-printing and minimal but effective framing of `R` code and output, replacing `Sweavel.sty` |
 | `spaper.sty` | Statistical reports + manuscript composition handling author comments/todo lists |
 | `hbeamer.sty` | Beamer presentations for use with `knitr` |
+| `marchange.sty` | Flexible, reliable way to indicated document changes |
 
 See also [greport.sty](https://github.com/harrelfe/greport/blob/master/inst/greport.sty) and [here](http://biostat.mc.vanderbilt.edu/BiostatisticianResponsibilities).
 
 
 #### Installation of `LaTeX` Packages
+The easiest way to install `LaTeX` packages is to copy the `.sty` files to `~/texmf/tex/ in your home area.  You can also do the following.
+
 On `Linux` systems using `TeXLive`, run the following `bash` script to install the `irlatex` `bash` script stored here.  Make sure that `~/bin` is in your system path.
 
 ```
