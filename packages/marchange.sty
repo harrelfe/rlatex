@@ -35,7 +35,17 @@ symbols in marginal notes]
 % Suggested symbol pairs:
 % \top \bot  \downarrow \uparrow  \cap \cup  \sqcap \sqcup  \wedge \vee
 % \bigtriangledown \bigtriangleup  \Uparrow \Downarrow
-
+%
+% Example \changes invocations:
+%
+% \changes{a}{black}{\top}{\bot}{2016-11-25}{included comments from R Smith}
+% \changes{a}{blue}{\downarrow}{\uparrow}{2016-11-25}{new thought}
+%
+% The starting and ending symbols must be valid LaTeX math mode
+% symbols. \top and \bot render especially nicely (T and upside-down T)
+%
+%
+%
 % \gdef instead of \newcommand because inside tabular only local definitions
 % are formed with newcommand - see
 % http://tex.stackexchange.com/questions/117928
