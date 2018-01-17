@@ -116,4 +116,18 @@
 \lstnewenvironment{Sinputsmaller}{%
  \lstset{style=Rstyle,basicstyle={\smaller}}}{}
 
+% knitr sometimes emits \includegraphics using \maxwidth even though
+% out.width is NULL.  Need to define it if not using LaTeX preamble
+% created by knitr
+
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
 \endinput
