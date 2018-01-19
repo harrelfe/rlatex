@@ -40,7 +40,7 @@
 \ProvidesPackage{hslide}[2016/05/28 Handouts/Slides Compromise Style]
 \RequirePackage{xkeyval}
 
-\RequirePackage[backref=true]{biblatex}
+\RequirePackage[backref=true,backend=biber]{biblatex}
 \newif\ifnochappg
 % {\csname ... endcsname} puts \ in front of definition of command
 \DeclareOptionX{citesize}{\def\citesize{\csname#1\endcsname}}
@@ -183,11 +183,20 @@
  colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
 \RequirePackage{breakurl}
 
-% See https://tex.stackexchange.com/questions/150805
-% Used by latexRef function
-\RequirePackage[-]{pagesel}
-\makeatletter
-\EveryShipout{\typeout{Absolute-page=\theps@count; Named-page=\thepage}}
-\makeatother
+% Creates .pag file mapping absolute page numbers to logical page
+% numbers; works with R function latexRef
+
+\newwrite\pgfile
+\immediate\openout\pgfile=\jobname .pag
+\newcounter{abspage}
+\setcounter{abspage}{0}
+
+\RequirePackage{everypage}
+\AddEverypageHook{%
+  \addtocounter{abspage}{1}
+  \immediate\write\pgfile{\thepage, \theabspage}%
+}
+\AtEndDocument{\clearpage\immediate\closeout\pgfile}
+
 
 \endinput
