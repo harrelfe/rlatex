@@ -183,4 +183,11 @@
  colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
 \RequirePackage{breakurl}
 
+% See https://tex.stackexchange.com/questions/150805
+% Used by latexRef function
+\RequirePackage[-]{pagesel}
+\makeatletter
+\EveryShipout{\typeout{Absolute-page=\theps@count; Named-page=\thepage}}
+\makeatother
+
 \endinput
