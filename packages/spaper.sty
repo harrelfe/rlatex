@@ -45,7 +45,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{spaper}[2015/11/11 Style for manuscripts incorporating knitr and author comments]
 
-\RequirePackage{xkeyval,relsize,biblatex,lscape,fancyhdr,filecontents,setspace,longtable}
+\RequirePackage{xkeyval,relsize,lscape,fancyhdr,filecontents,setspace,longtable}
+\RequirePackage[backend=biber,bibencoding=utf8]{biblatex}
 
 \DeclareOptionX{margin}{\def\margin{#1}}
 \DeclareOptionX{bib}{\def\bibfile{#1}\addbibresource{#1}}
