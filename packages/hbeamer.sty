@@ -28,7 +28,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hbeamer}[2016/04/22 Beamer Style for knitr]
 \RequirePackage{xkeyval}
-\RequirePackage[style=authoryear,giveninits=true,doi=false,url=false,maxbibnames=3,maxcitenames=3,backend=biber,backref=true]{biblatex}
+\RequirePackage[style=authoryear,giveninits=true,doi=false,url=false,maxbibnames=3,maxcitenames=3,backend=biber,backref=true,bibencoding=utf8]{biblatex}
+
 \DeclareOptionX{logo}{\logo{\includegraphics[width=.123\textwidth]{#1}}}
 \DeclareOptionX{bib}{\addbibresource{#1}}
 \ProcessOptionsX\relax
